@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { House, LogOut, Menu, Settings } from "lucide-react";
+import { Flame, Heart, House, LogOut, Menu, Settings } from "lucide-react";
 import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
 
@@ -30,8 +30,8 @@ interface SideNavHeaderProps {
 
 export default function SideNavHeader({ session, links }: SideNavHeaderProps) {
   return (
-    <header className="fixed left-0 right-0 z-40 h-14 lg:h-[60px] lg:px-6 bg-white">
-      <div className="flex h-full w-full items-center justify-between gap-4 bg-white px-4 md:justify-end md:px-6">
+    <header className="fixed left-0 right-0 z-40 h-14 lg:h-[60px] lg:px-6 bg-background">
+      <div className="flex h-full w-full items-center justify-between gap-4 bg-background px-4 md:justify-end md:px-6">
         <Sheet>
           <SheetTrigger asChild>
             <Button
@@ -52,7 +52,7 @@ export default function SideNavHeader({ session, links }: SideNavHeaderProps) {
               >
                 <Image
                   src="/images/logo.png"
-                  alt="Charing Cub"
+                  alt="CodeLingo"
                   width={100}
                   height={100}
                 />
@@ -67,44 +67,16 @@ export default function SideNavHeader({ session, links }: SideNavHeaderProps) {
             </nav>
           </SheetContent>
         </Sheet>
-        <DropdownMenu>
-          <div className="flex items-center gap-5">
-            <h4 className="hidden font-semibold md:block">
-              {session.user.name}
-            </h4>
-            <DropdownMenuTrigger asChild>
-              <Button variant="tertiary" size="icon" className="rounded-full">
-                <Avatar className="border border-muted">
-                  <AvatarImage src={buildFromAppURL(session.user.profile)} />
-                  <AvatarFallback className="text-gray-700">
-                    {generateFallbackFromName(session.user.name)}
-                  </AvatarFallback>
-                </Avatar>
-                <span className="sr-only">Toggle user menu</span>
-              </Button>
-            </DropdownMenuTrigger>
+        <div className="md:flex md:gap-x-12">
+          <div className="flex items-center gap-x-2">
+            <Flame className="text-orange-500" />
+            <h1 className="text-white font-semibold">2 hari beruntun</h1>
           </div>
-          <DropdownMenuContent align="end" className="font-poppins">
-            <DropdownMenuLabel>
-              <p>{session.user.name}</p>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild className="cursor-pointer">
-              <Link href="/">
-                <House /> Home
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
-              className="text-destructive cursor-pointer focus:text-destructive focus:bg-destructive/20"
-              onClick={() => signOut({ callbackUrl: "/login" })}
-            >
-              {" "}
-              <LogOut />
-              Log Out
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+          <div className="flex items-center gap-x-2">
+            <Heart className="text-destructive" />
+            <h1 className="text-white font-semibold">5</h1>
+          </div>
+        </div>
       </div>
     </header>
   );

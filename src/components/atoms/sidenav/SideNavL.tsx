@@ -10,7 +10,7 @@ interface SideNavLProps {
 
 export default function SideNavL({ links }: SideNavLProps) {
   return (
-    <div className="relative z-50 hidden overflow-hidden bg-[#f9f9f9] p-6 md:block">
+    <div className="relative z-50 hidden overflow-hidden bg-background p-6 md:block md:border-r-2">
       <div className="z-10 flex h-full max-h-screen flex-col gap-12">
         <div>
           <Link
@@ -19,9 +19,9 @@ export default function SideNavL({ links }: SideNavLProps) {
           >
             <Image
               src="/images/logo.png"
-              alt="Charing Cub"
-              width={100}
-              height={100}
+              alt="CodeLingo"
+              width={200}
+              height={200}
             />
           </Link>
         </div>
@@ -35,11 +35,6 @@ export default function SideNavL({ links }: SideNavLProps) {
           </nav>
         </div>
       </div>
-
-      <div className="absolute -bottom-24 -right-12 -z-10 h-64 w-64 rounded-full bg-gradient-to-tr from-primary/20 to-primary/10 blur-xl"></div>
-      <div className="absolute -left-36 bottom-36 -z-10 h-64 w-64 rounded-full bg-gradient-to-tr from-primary/20 to-primary/10 blur-xl"></div>
-      <div className="absolute -right-36 top-36 -z-10 h-64 w-64 rounded-full bg-gradient-to-tr from-[#EED584]/20 to-[#EED584]/10 blur-xl"></div>
-      <div className="absolute -left-36 top-2 -z-10 h-64 w-64 rounded-full bg-gradient-to-tr from-[#EED584]/20 to-[#EED584]/10 blur-xl"></div>
     </div>
   );
 }

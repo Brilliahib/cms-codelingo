@@ -25,10 +25,10 @@ export default function SideNavLink({
     <Link
       href={href}
       className={cn(
-        "text-md flex items-center gap-3 rounded-xl px-3 py-2 text-foreground transition-all",
+        "text-md flex items-center text-white gap-3 rounded-xl px-3 py-2 transition-all",
         {
           "hover:text-primary": !active,
-          "bg-primary text-primary-foreground": active,
+          "border-primary border-2 text-primary": active,
         }
       )}
     >

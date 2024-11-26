@@ -4,14 +4,15 @@ import { PropsWithChildren, useMemo } from "react";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboardIcon,
-  Settings2Icon,
   LucideIcon,
   Newspaper,
   Users,
-  UserRound,
-  CalendarCheck,
   HeartHandshake,
   HousePlus,
+  Trophy,
+  ScrollText,
+  User,
+  BookOpen,
 } from "lucide-react";
 import { Session } from "next-auth";
 import SideNavL from "@/components/atoms/sidenav/SideNavL";
@@ -42,60 +43,6 @@ export default function Sidenav({ children, session }: SidenavProps) {
               icon: LayoutDashboardIcon,
               active: pathname === "/dashboard/admin",
             },
-            {
-              href: "/dashboard/admin/article",
-              label: "Article",
-              icon: Newspaper,
-              active: pathname.startsWith("/dashboard/admin/article"),
-            },
-            {
-              href: "/dashboard/admin/daycares",
-              label: "Daycare",
-              icon: HousePlus,
-              active: pathname.startsWith("/dashboard/admin/daycares"),
-            },
-            {
-              href: "/dashboard/admin/nannies",
-              label: "Nanny",
-              icon: HeartHandshake,
-              active: pathname.startsWith("/dashboard/admin/nannies"),
-            },
-            {
-              href: "/dashboard/admin/users",
-              label: "Users",
-              icon: Users,
-              active: pathname.startsWith("/dashboard/admin/users"),
-            },
-          ]
-        : session?.user.role === "daycare"
-        ? [
-            {
-              href: "/dashboard/daycares",
-              label: "Dashboard",
-              icon: LayoutDashboardIcon,
-              active: pathname === "/dashboard/daycares",
-            },
-            {
-              href: "/dashboard/daycares/nannies",
-              label: "Nannies",
-              icon: UserRound,
-              active: pathname.startsWith("/dashboard/daycares/nannies"),
-            },
-          ]
-        : session?.user.role === "nannies"
-        ? [
-            {
-              href: "/dashboard/nannies",
-              label: "Dashboard",
-              icon: LayoutDashboardIcon,
-              active: pathname === "/dashboard/nannies",
-            },
-            {
-              href: "/dashboard/nannies/bookings",
-              label: "Booking",
-              icon: CalendarCheck,
-              active: pathname.startsWith("/dashboard/nannies/bookings"),
-            },
           ]
         : [
             {
@@ -105,10 +52,22 @@ export default function Sidenav({ children, session }: SidenavProps) {
               active: pathname === "/dashboard",
             },
             {
-              href: "/dashboard/bookings",
-              label: "Booking",
-              icon: CalendarCheck,
-              active: pathname.startsWith("/dashboard/bookings"),
+              href: "/dashboard/studies",
+              label: "Belajar",
+              icon: BookOpen,
+              active: pathname.startsWith("/dashboard/studies"),
+            },
+            {
+              href: "/dashboard/mission",
+              label: "Misi",
+              icon: ScrollText,
+              active: pathname.startsWith("/dashboard/mission"),
+            },
+            {
+              href: "/dashboard/leaderboard",
+              label: "Leaderboard",
+              icon: Trophy,
+              active: pathname.startsWith("/dashboard/leaderboard"),
             },
           ]),
       // {
@@ -118,10 +77,10 @@ export default function Sidenav({ children, session }: SidenavProps) {
       //   icon: MessageCircleMore,
       // },
       {
-        href: "/dashboard/settings",
-        label: "Setting",
-        active: pathname.startsWith("/dashboard/settings"),
-        icon: Settings2Icon,
+        href: "/dashboard/profile",
+        label: "Profile",
+        active: pathname.startsWith("/dashboard/profile"),
+        icon: User,
       },
     ],
     [session, pathname]
@@ -130,9 +89,9 @@ export default function Sidenav({ children, session }: SidenavProps) {
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <SideNavL links={links} />
-      <div className="flex max-h-screen flex-col overflow-y-auto bg-white">
+      <div className="flex max-h-screen flex-col overflow-y-auto">
         <SideNavHeader session={session} links={links} />
-        <main className="mt-16 flex flex-1 bg-white flex-col gap-4 p-4 md:px-10 md:py-6 lg:gap-6">
+        <main className="mt-16 flex flex-1 flex-col gap-4 p-4 md:px-10 md:py-6 lg:gap-6">
           {children}
         </main>
       </div>
