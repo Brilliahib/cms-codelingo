@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Paytone_One } from "next/font/google";
+import { Poppins, Baloo_2 } from "next/font/google";
 import "./globals.css";
 import GlobalProvider from "@/components/organism/GlobalProvider";
 import { Toaster } from "@/components/ui/toaster";
@@ -19,11 +19,11 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-const paytone = Paytone_One({
+const baloo2 = Baloo_2({
   subsets: ["latin"],
   display: "swap",
-  weight: ["400"],
-  variable: "--font-paytone",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-baloo2",
 });
 
 export default function RootLayout({
@@ -34,11 +34,11 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${poppins.variable} ${paytone.variable} antialiased`}
+      className={`${poppins.variable} ${baloo2.variable} antialiased`}
     >
       <body>
         <GlobalProvider>
-          <main className="font-poppins">{children}</main>
+          <main className="font-baloo2">{children}</main>
           <Toaster />
         </GlobalProvider>
       </body>
