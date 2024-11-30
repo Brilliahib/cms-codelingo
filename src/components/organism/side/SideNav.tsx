@@ -52,10 +52,10 @@ export default function Sidenav({ children, session }: SidenavProps) {
               active: pathname === "/dashboard",
             },
             {
-              href: "/dashboard/studies",
+              href: "/dashboard/learning",
               label: "Belajar",
               icon: BookOpen,
-              active: pathname.startsWith("/dashboard/studies"),
+              active: pathname.startsWith("/dashboard/learning"),
             },
             {
               href: "/dashboard/mission",
@@ -91,7 +91,7 @@ export default function Sidenav({ children, session }: SidenavProps) {
       <SideNavL links={links} />
       <div className="flex max-h-screen flex-col overflow-y-auto">
         <SideNavHeader session={session} links={links} />
-        <main className="mt-16 flex flex-1 flex-col gap-4 p-4 md:px-10 md:py-6 lg:gap-6">
+        <main className="mt-16 flex flex-1 flex-col gap-4 p-4 md:px-16 md:py-6 lg:gap-6">
           {children}
         </main>
       </div>

@@ -25,14 +25,14 @@ export default function SideNavLink({
     <Link
       href={href}
       className={cn(
-        "text-md flex items-center text-white gap-3 rounded-xl px-3 py-2 transition-all",
+        "text-base flex items-center text-white gap-3 rounded-xl px-3 py-2 transition-all",
         {
           "hover:text-primary": !active,
-          "border-primary border-2 text-primary": active,
+          "outline outline-2 outline-primary text-primary": active,
         }
       )}
     >
-      {Icon ? <Icon className="h-4 w-4" /> : null}
+      {Icon ? <Icon className="h-6 w-6" /> : null}
       {label}
     </Link>
   );

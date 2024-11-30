@@ -13,6 +13,8 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         surface: "hsl(var(--surface))",
+        surface2: "hsl(var(--surface-secondary))",
+        disabled: "hsl(var(--disabled))",
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
