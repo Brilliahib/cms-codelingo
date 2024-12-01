@@ -124,7 +124,7 @@ export default function LoginForm() {
               </form>
             </Form>
             <div className="mt-6 text-center">
-              <p className="text-muted-foreground text-sm">
+              <p className="text-muted text-sm">
                 Belum punya akun?{" "}
                 <Link href={"/register"}>
                   <span className="text-primary underline font-semibold">

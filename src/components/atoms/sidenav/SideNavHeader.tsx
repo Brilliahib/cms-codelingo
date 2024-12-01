@@ -28,10 +28,10 @@ interface SideNavHeaderProps {
   links: NavLink[];
 }
 
-export default function SideNavHeader({ session, links }: SideNavHeaderProps) {
+export default function SideNavHeader({ links }: SideNavHeaderProps) {
   return (
     <header className="fixed left-0 right-0 z-40 h-14 lg:h-[60px] lg:px-6 bg-background">
-      <div className="flex h-full w-full items-center justify-between gap-4 bg-background px-4 md:justify-end md:px-6">
+      <div className="flex h-full w-full items-center justify-between gap-4 bg-background px-4 md:justify-end md:px-16">
         <Sheet>
           <SheetTrigger asChild>
             <Button
@@ -39,7 +39,7 @@ export default function SideNavHeader({ session, links }: SideNavHeaderProps) {
               size="icon"
               className="shrink-0 md:hidden"
             >
-              <Menu className="h-5 w-5" />
+              <Menu className="h-5 w-5 text-white" />
               <span className="sr-only">Toggle navigation menu</span>
             </Button>
           </SheetTrigger>
@@ -67,14 +67,16 @@ export default function SideNavHeader({ session, links }: SideNavHeaderProps) {
             </nav>
           </SheetContent>
         </Sheet>
-        <div className="md:flex md:gap-x-12">
+        <div className="flex gap-x-12">
           <div className="flex items-center gap-x-2">
-            <Flame className="text-orange-500" />
-            <h1 className="text-white font-semibold">2 hari beruntun</h1>
+            <Flame className="text-orange-500" fill="currentColor" />
+            <h1 className="text-white font-semibold text-lg">
+              2 hari beruntun
+            </h1>
           </div>
           <div className="flex items-center gap-x-2">
-            <Heart className="text-destructive" />
-            <h1 className="text-white font-semibold">5</h1>
+            <Heart className="text-destructive" fill="currentColor" />
+            <h1 className="text-white font-semibold text-lg">5</h1>
           </div>
         </div>
       </div>
