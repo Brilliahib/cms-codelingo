@@ -3,6 +3,7 @@ import { z } from "zod";
 export const registerSchema = z
   .object({
     name: z.string().min(1, { message: "Nama harus diisi." }).trim(),
+    username: z.string().min(1, { message: "Nama harus diisi." }).trim(),
     email: z.string().min(1, { message: "Email harus diisi." }).trim(),
     password: z.string().min(1, { message: "Password harus diisi." }),
     password_confirmation: z

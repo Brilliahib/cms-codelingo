@@ -4,9 +4,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { authOptions } from "@/lib/auth";
 import { Lock } from "lucide-react";
+import { getServerSession } from "next-auth";
 
-export default function LearningDashboardWrapper() {
+export default async function LearningDashboardWrapper() {
+  const session = await getServerSession(authOptions);
   return (
     <>
       <div className="flex flex-col md:flex-row md:gap-12 gap-8">
@@ -54,7 +57,7 @@ export default function LearningDashboardWrapper() {
           </Card>
         </div>
         <div className="md:w-4/12 w-full space-y-6">
-          <CardProfile />
+          <CardProfile session={session!} />
           <CardDailyMission />
         </div>
       </div>
