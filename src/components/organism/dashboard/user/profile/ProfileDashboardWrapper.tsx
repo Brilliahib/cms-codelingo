@@ -1,3 +1,4 @@
+import CardAchievement from "@/components/molecules/card/CardAchievement";
 import CardDailyMission from "@/components/molecules/card/CardDailyMission";
 import CardProfile from "@/components/molecules/card/CardProfile";
 import CardStatistics from "@/components/molecules/card/CardStatistics";
@@ -10,6 +11,7 @@ export default function ProfileDashboardWrapper() {
         <div className="md:w-8/12 w-full space-y-6">
           <CardUserProfile />
           <CardStatistics />
+          <CardAchievement />
         </div>
         <div className="md:w-4/12 w-full space-y-6">
           <CardProfile />
