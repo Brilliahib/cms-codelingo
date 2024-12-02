@@ -2,23 +2,12 @@
 
 import Link from "next/link";
 
-import { Flame, Heart, House, LogOut, Menu, Settings } from "lucide-react";
+import { Flame, Heart, LogOut, Menu } from "lucide-react";
 import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
 
-import { buildFromAppURL, generateFallbackFromName } from "@/utils/misc";
-
 import { Link as NavLink } from "@/components/organism/side/SideNav";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import SideNavLink from "./SideNavLink";
 import Image from "next/image";
@@ -37,7 +26,7 @@ export default function SideNavHeader({ links }: SideNavHeaderProps) {
             <Button
               variant="outline"
               size="icon"
-              className="shrink-0 md:hidden"
+              className="shrink-0 md:hidden rounded-lg hover:bg-transparent"
             >
               <Menu className="h-5 w-5 text-white" />
               <span className="sr-only">Toggle navigation menu</span>
@@ -53,8 +42,8 @@ export default function SideNavHeader({ links }: SideNavHeaderProps) {
                 <Image
                   src="/images/logo.png"
                   alt="CodeLingo"
-                  width={100}
-                  height={100}
+                  width={150}
+                  height={150}
                 />
               </Link>
             </div>
