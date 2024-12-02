@@ -5,10 +5,6 @@ import { usePathname } from "next/navigation";
 import {
   LayoutDashboardIcon,
   LucideIcon,
-  Newspaper,
-  Users,
-  HeartHandshake,
-  HousePlus,
   Trophy,
   ScrollText,
   User,

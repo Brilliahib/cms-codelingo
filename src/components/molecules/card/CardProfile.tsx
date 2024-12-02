@@ -1,10 +1,15 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Star } from "lucide-react";
+import { Session } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function CardProfile() {
+export interface CardProfileProps {
+  session: Session;
+}
+
+export default function CardProfile({ session }: CardProfileProps) {
   return (
     <>
       <Card className="bg-transparent border">
@@ -28,7 +33,7 @@ export default function CardProfile() {
                 className="w-20 h-20"
               />
               <div className="space-y-2">
-                <h1 className="font-bold text-xl">Bagus Tri Atmojo</h1>
+                <h1 className="font-bold text-xl">{session.user.name}</h1>
                 <p className="font-semibold">Level 99</p>
               </div>
             </div>
