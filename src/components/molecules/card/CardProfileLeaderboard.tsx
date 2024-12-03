@@ -15,7 +15,7 @@ export default function CardProfileLeaderboard({
   return (
     <>
       {/* profile component */}
-      <div className="flex flex-col lg:flex-row gap-4">
+      <div className="flex flex-col lg:flex-row gap-4 mb-12">
         <Card className="w-full lg:w-3/4 p-4 flex flex-col lg:flex-row justify-start gap-4 items-center">
           <Image src={profile} alt="Profile" width="120" height="120" />
           <div>
@@ -38,6 +38,7 @@ export default function CardProfileLeaderboard({
           </div>
         </Card>
       </div>
+      <hr className="border-t-2 border-[#90A3BD]" />
       {/* ranking bruh */}
     </>
   );
