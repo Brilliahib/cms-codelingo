@@ -4,6 +4,11 @@ import { Session } from "next-auth";
 import { Badge } from "@/components/ui/badge";
 import profile from "/public/images/profile.png";
 import bronze from "/public/images/tier/bronze.svg";
+import diamond from "/public/images/tier/diamond.svg";
+import emerald from "/public/images/tier/emerald.svg";
+import gold from "/public/images/tier/gold.svg";
+import silver from "/public/images/tier/silver.svg";
+import RankingLeaderboard from "./RankingLeaderboard";
 
 export interface CardProfileLeaderboardProps {
   session: Session;
@@ -40,6 +45,7 @@ export default function CardProfileLeaderboard({
       </div>
       <hr className="border-t-2 border-[#90A3BD]" />
       {/* ranking bruh */}
+      <RankingLeaderboard />
     </>
   );
 }
