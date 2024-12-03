@@ -1,6 +1,6 @@
 import CardDailyMission from "@/components/molecules/card/CardDailyMission";
 import CardProfile from "@/components/molecules/card/CardProfile";
-import CardMission from "@/components/molecules/card/CarsMission";
+import CardMission from "@/components/molecules/card/CardMission";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 
