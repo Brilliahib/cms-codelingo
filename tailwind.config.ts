@@ -15,7 +15,7 @@ export default {
         surface: "hsl(var(--surface))",
         surface2: "hsl(var(--surface-secondary))",
         disabled: "hsl(var(--disabled))",
-        green: "hsl(var(--green))",
+        nature: "hsl(var(--nature))",
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
