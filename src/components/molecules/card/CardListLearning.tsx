@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useGetAllLearningPath } from "@/http/(user)/learning/get-all-learning";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 export default function CardListLearning() {
   const { data: session, status } = useSession();
@@ -28,7 +29,11 @@ export default function CardListLearning() {
                   <Progress value={40} />
                   <p>40% Progress Belajar</p>
                 </div>
-                <Button>Lanjut Belajar</Button>
+                <Button>
+                  <Link href={`/dashboard/learning/${learning.id}`}>
+                    Lanjut Belajar
+                  </Link>
+                </Button>
               </div>
             </CardContent>
           </Card>
