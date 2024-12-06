@@ -45,7 +45,7 @@ export default function CardProfileLeaderboard({
       </div>
       <hr className="border-t-2 border-[#90A3BD]" />
       {/* ranking bruh */}
-      <RankingLeaderboard />
+      <RankingLeaderboard session={session!} />
     </>
   );
 }
