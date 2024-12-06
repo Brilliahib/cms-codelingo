@@ -1,12 +1,12 @@
 import LearningDetailDashboardWrapper from "@/components/organism/dashboard/user/learning/LearningDetailDashboardWrapper";
 
-interface DashboardLearningDetailPageParams {
+interface DashboardLearningDetailPageProps {
   params: { id: number };
 }
 
 export default function DashboardLearningDetailPage({
   params,
-}: DashboardLearningDetailPageParams) {
+}: DashboardLearningDetailPageProps) {
   return (
     <>
       <LearningDetailDashboardWrapper id={params.id} />
