@@ -1,11 +1,9 @@
 "use client";
 
-import CardDailyMission from "@/components/molecules/card/CardDailyMission";
-import CardProfile from "@/components/molecules/card/CardProfile";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { useGetLearningPathDetail } from "@/http/(user)/learning/get-detail-learning";
-import { ArrowLeft, ChevronRight } from "lucide-react";
+import { useGetUserLearningPathDetail } from "@/http/(user)/user-learningpath/get-detail-user-learning-path";
+import { ArrowLeft, BookOpen, Check, Play } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
@@ -17,7 +15,7 @@ export default function LearningDetailDashboardWrapper({
   id,
 }: LearningDetailProps) {
   const { data: session, status } = useSession();
-  const { data, isPending } = useGetLearningPathDetail(
+  const { data, isPending } = useGetUserLearningPathDetail(
     { id, token: session?.access_token as string },
     { enabled: status === "authenticated" }
   );
@@ -31,7 +29,9 @@ export default function LearningDetailDashboardWrapper({
                 <CardContent className="p-6">
                   <div className="flex gap-4 items-center">
                     <ArrowLeft />
-                    <h1 className="font-bold text-2xl">{data?.data.title}</h1>
+                    <h1 className="font-bold text-2xl">
+                      {data?.data.learning_path.title}
+                    </h1>
                   </div>
                 </CardContent>
               </Card>
@@ -41,32 +41,62 @@ export default function LearningDetailDashboardWrapper({
               <Progress value={40} />
               <p>40% Progress Belajar</p>
             </div>
-            <div className="md:space-y-6 space-y-4">
-              {data?.data.materials.map((materials) => (
-                <Card
-                  key={materials.id}
-                  className="hover:bg-primary hover:text-background"
-                >
-                  <CardContent className="p-6">
-                    <div className="flex justify-between gap-4 items-center">
-                      <div className="flex gap-4 items-center">
-                        <h1 className="font-bold text-xl">{materials.title}</h1>
-                        <p className="text-yellow-500 font-semibold">
-                          + 120 Exp
-                        </p>
+            <div className="relative flex justify-center items-center w-full">
+              <div className="relative w-1/2">
+                {data?.data.user_materials.map((material, index) => {
+                  const top = index * 80;
+                  const isRight = index % 2 === 0;
+                  const left = isRight
+                    ? `${20 + (index % 3) * 20}%`
+                    : `${60 - (index % 3) * 20}%`;
+
+                  const bgColor = material.is_unlocked
+                    ? "bg-primary"
+                    : "bg-gray-500";
+                  const borderColor = material.is_unlocked
+                    ? "border-blue-700"
+                    : "border-gray-700";
+
+                  const Icon = material.is_completed
+                    ? Check
+                    : material.is_unlocked
+                    ? Play
+                    : BookOpen;
+
+                  const MaterialLink = material.is_unlocked ? (
+                    <Link href={`/materials/${material.id}`}>
+                      <div className="flex flex-col items-center space-y-2">
+                        <div
+                          className={`p-4 rounded-full ${bgColor} w-fit border-b-8 ${borderColor}`}
+                        >
+                          <Icon className="h-8 w-8 text-white" />
+                        </div>
                       </div>
-                      <ChevronRight />
+                    </Link>
+                  ) : (
+                    <div className="flex flex-col items-center space-y-2">
+                      <div
+                        className={`p-4 rounded-full ${bgColor} w-fit border-b-8 ${borderColor}`}
+                      >
+                        <Icon className="h-8 w-8 text-white" />
+                      </div>
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
+                  );
+
+                  return (
+                    <div
+                      key={material.id}
+                      className="absolute transition-all duration-300"
+                      style={{ top: `${top}px`, left }}
+                    >
+                      {MaterialLink}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
-        {/* <div className="md:w-4/12 w-full space-y-6">
-          <CardProfile session={session!} />
-          <CardDailyMission />
-        </div> */}
       </div>
     </>
   );
