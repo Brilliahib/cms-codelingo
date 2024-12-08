@@ -1,15 +1,17 @@
 import LearningDetailDashboardWrapper from "@/components/organism/dashboard/user/learning/LearningDetailDashboardWrapper";
 
 interface DashboardLearningDetailPageProps {
-  params: { id: number };
+  params: Promise<{ id: string }>;
 }
 
-export default function DashboardLearningDetailPage({
+export default async function DashboardLearningDetailPage({
   params,
 }: DashboardLearningDetailPageProps) {
+  const { id } = await params;
+
   return (
     <>
-      <LearningDetailDashboardWrapper id={params.id} />
+      <LearningDetailDashboardWrapper id={Number(id)} />
     </>
   );
 }
