@@ -9,6 +9,7 @@ import {
   ScrollText,
   User,
   BookOpen,
+  Users,
 } from "lucide-react";
 import { Session } from "next-auth";
 import SideNavL from "@/components/atoms/sidenav/SideNavL";
@@ -39,6 +40,18 @@ export default function Sidenav({ children, session }: SidenavProps) {
               icon: LayoutDashboardIcon,
               active: pathname === "/dashboard/admin",
             },
+            {
+              href: "/dashboard/admin/learning",
+              label: "Learning Path",
+              icon: BookOpen,
+              active: pathname === "/dashboard/admin/learning",
+            },
+            {
+              href: "/dashboard/admin/users",
+              label: "Pengguna",
+              icon: Users,
+              active: pathname === "/dashboard/admin/users",
+            },
           ]
         : [
             {
@@ -65,19 +78,13 @@ export default function Sidenav({ children, session }: SidenavProps) {
               icon: Trophy,
               active: pathname.startsWith("/dashboard/leaderboard"),
             },
+            {
+              href: "/dashboard/profile",
+              label: "Profile",
+              active: pathname.startsWith("/dashboard/profile"),
+              icon: User,
+            },
           ]),
-      // {
-      //   href: "/dashboard/messages",
-      //   label: "Message",
-      //   active: pathname.startsWith("/dashboard/messages"),
-      //   icon: MessageCircleMore,
-      // },
-      {
-        href: "/dashboard/profile",
-        label: "Profile",
-        active: pathname.startsWith("/dashboard/profile"),
-        icon: User,
-      },
     ],
     [session, pathname]
   );
