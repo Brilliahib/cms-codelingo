@@ -86,7 +86,7 @@ export const learningColumns: ColumnDef<Learning>[] = [
           <DropdownMenuItem>
             <Link
               href={`/dashboard/admin/learning/${data.id}/edit`}
-              className="flex items-center text-gray-700"
+              className="flex items-center text-white hover:text-background"
             >
               <SquarePen className="h-4 w-4" />
               <span className="ml-2">Edit Learning Path</span>
@@ -95,7 +95,7 @@ export const learningColumns: ColumnDef<Learning>[] = [
           <DropdownMenuItem>
             <Link
               href={`/dashboard/admin/learning/${data.id}`}
-              className="flex items-center text-gray-700"
+              className="flex items-center text-white hover:text-background"
             >
               <Eye className="h-4 w-4" />
               <span className="ml-2">Detail Learning Path</span>
