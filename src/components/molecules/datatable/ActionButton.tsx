@@ -15,7 +15,7 @@ const ActionButton = ({ children }: PropsWithChildren) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="h-8 w-8 p-0">
+        <Button className="h-8 w-8 p-0 bg-transparent border-0 text-white hover:bg-transparent shadow-none">
           <span className="sr-only">Buka Menu</span>
           <MoreHorizontal className="h-4 w-4" />
         </Button>
