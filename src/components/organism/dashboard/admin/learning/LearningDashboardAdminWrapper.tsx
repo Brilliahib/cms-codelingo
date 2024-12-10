@@ -22,7 +22,7 @@ export default function LearningDashboardAdminWrapper() {
 
   const filteredData =
     data?.data.filter((learning) =>
-      learning.title.toLowerCase().includes(searchQuery.toLowerCase())
+      learning.title?.toLowerCase().includes(searchQuery.toLowerCase())
     ) || [];
   return (
     <>

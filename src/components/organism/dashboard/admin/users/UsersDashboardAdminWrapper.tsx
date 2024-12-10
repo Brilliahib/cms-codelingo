@@ -19,7 +19,7 @@ export default function UsersDashboardAdminWrapper() {
 
   const filteredData =
     data?.data.filter((user) =>
-      user.name.toLowerCase().includes(searchQuery.toLowerCase())
+      user.name?.toLowerCase().includes(searchQuery.toLowerCase())
     ) || [];
   return (
     <>
