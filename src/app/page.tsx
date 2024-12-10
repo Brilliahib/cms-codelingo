@@ -1,3 +1,4 @@
+import Footer from "@/components/organism/footer/Footer";
 import ContentPanda from "@/components/organism/home/ContentPanda";
 import HomeContent from "@/components/organism/home/HomeContent";
 import Reason from "@/components/organism/home/Reason";
@@ -12,6 +13,7 @@ export default function Home() {
       <ContentPanda />
       <Reason />
       <TungguApaLagi />
+      <Footer />
     </>
   );
 }
