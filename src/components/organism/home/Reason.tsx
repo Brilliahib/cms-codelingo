@@ -28,7 +28,7 @@ export default function Reason() {
             menyenangkan.
           </p>
         </div>
-        <div className="flex flex-col items-center space-y-4">
+        <div className="flex flex-col items-center space-y-4 pb-8">
           <Image src={flowchart} alt="flowchart" width={500} height={500} />
           <h1 className="text-[#38B5FC] text-2xl font-bold">
             Pendekatan Ramah Anak
@@ -37,6 +37,19 @@ export default function Reason() {
             Pembelajaran dirancang khusus agar sesuai dengan kebutuhan
             anak-anak, menggunakan gambar berwarna-warni, animasi interaktif,
             dan narasi sederhana yang mudah dipahami.
+          </p>
+        </div>
+        <div className="flex flex-col items-center space-y-4 pb-8">
+          {/* animasi tambahan lainnya? */}
+          <Image src={flowchart} alt="flowchart" width={500} height={500} />
+          <h1 className="text-[#38B5FC] text-2xl font-bold">
+            Belajar Seperti Bermain
+          </h1>
+          <p className="w-1/2 text-center opacity-80">
+            Pembelajaran dikemas seperti permainan, di mana anak-anak bisa
+            mengumpulkan EXP, mencapai level baru, dan bersaing di liga
+            leaderboard yang akan meningkatkan rasa percaya diri dan semangat
+            anak untuk menyelesaikan tantangan berikutnya.
           </p>
         </div>
       </div>
