@@ -21,13 +21,13 @@ export default function CardListLearning() {
           <Card key={learning.id}>
             <CardContent className="p-8">
               <div className="md:space-y-6 space-y-4">
-                <Badge>5 Materi</Badge>
+                <Badge>{learning.user_materials.length} Materi</Badge>
                 <div className="space-y-4">
                   <h1 className="text-xl md:text-2xl font-bold">
                     {learning.learning_path.title}
                   </h1>
-                  <Progress value={40} />
-                  <p>40% Progress Belajar</p>
+                  <Progress value={learning.progress_status} />
+                  <p>{learning.progress_status}% Progress Belajar</p>
                 </div>
                 <Button>
                   <Link href={`/dashboard/learning/${learning.id}`}>
