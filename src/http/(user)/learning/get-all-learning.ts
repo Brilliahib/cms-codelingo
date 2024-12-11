@@ -4,15 +4,15 @@ import { AxiosError } from "axios";
 import { api } from "@/lib/axios";
 import { Learning } from "@/types/learning/learning";
 
-interface GetUserLearningPathResponse {
+interface GetAllLearningPathResponse {
   data: Learning[];
 }
 
-export const getUserLearningPathHandler = async (
+export const getAllLearningPathHandler = async (
   token: string
-): Promise<GetUserLearningPathResponse> => {
-  const { data } = await api.get<GetUserLearningPathResponse>(
-    "/user-learning-path",
+): Promise<GetAllLearningPathResponse> => {
+  const { data } = await api.get<GetAllLearningPathResponse>(
+    "/learning-paths",
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -23,13 +23,13 @@ export const getUserLearningPathHandler = async (
   return data;
 };
 
-export const useGetUserLearningPath = (
+export const useGetAllLearningPath = (
   token: string,
-  options?: Partial<UseQueryOptions<GetUserLearningPathResponse, AxiosError>>
+  options?: Partial<UseQueryOptions<GetAllLearningPathResponse, AxiosError>>
 ) => {
   return useQuery({
-    queryKey: ["user-learning-path"],
-    queryFn: () => getUserLearningPathHandler(token),
+    queryKey: ["learning-path-list"],
+    queryFn: () => getAllLearningPathHandler(token),
     ...options,
   });
 };

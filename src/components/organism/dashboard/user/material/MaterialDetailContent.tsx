@@ -5,8 +5,10 @@ import { Progress } from "@/components/ui/progress";
 import { useMarkCompleteMaterial } from "@/http/(user)/learning/material/add-mark-complete-material";
 import { useGetAllMaterial } from "@/http/(user)/learning/material/get-all-material";
 import { useGetMaterialDetail } from "@/http/(user)/learning/material/get-detail-material";
+import { baseUrl } from "@/utils/misc";
 import { ArrowLeft, ArrowRight, X } from "lucide-react";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -81,13 +83,42 @@ export default function MaterialDetailContent({ id }: MaterialDetailProps) {
         <div>
           <h1 className="font-bold text-3xl">{data?.data.title}</h1>
         </div>
-        <div className="grid md:grid-cols-2 grid-cols-1 md:gap-12 gap-8">
+        <div
+          className={`grid ${
+            data?.data.material_image
+              ? "md:grid-cols-2 xl:gap-24 md:gap-12"
+              : "grid-cols-1"
+          } gap-8`}
+        >
           <div>
-            <h1 className="font-bold text-xl">{data?.data.material_text}</h1>
+            <h1 className="text-xl leading-loose">
+              {data?.data.material_text}
+            </h1>
           </div>
+          {data?.data.material_image && (
+            <div>
+              <Image
+                src={`${baseUrl}/${data?.data.material_image}`}
+                alt={data?.data.title ?? ""}
+                width={1000}
+                height={1000}
+                className="w-full rounded-xl"
+              />
+            </div>
+          )}
         </div>
       </div>
-      <div className="flex justify-between items-end pad-x pb-8">
+      <div
+        className="
+          flex
+          justify-between
+          items-center
+          md:static
+          fixed bottom-0 left-0 w-full
+          pad-x py-4
+          shadow-md md:bg-transparent bg-background
+        "
+      >
         <Button
           variant={"background"}
           onClick={() => goToMaterial(currentIndex - 1)}
@@ -96,7 +127,7 @@ export default function MaterialDetailContent({ id }: MaterialDetailProps) {
           <ArrowLeft /> Sebelumnya
         </Button>
         <Button
-          onClick={handleNextMaterial} // use the new handler
+          onClick={handleNextMaterial}
           disabled={currentIndex >= materials.length - 1}
         >
           Selanjutnya <ArrowRight />
