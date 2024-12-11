@@ -1,5 +1,5 @@
 import Image from "next/image";
-import learnPanda from "/public/images/learn-panda.png";
+import learnPanda from "/public/images/learn-panda.gif";
 import { Zap } from "lucide-react";
 
 export default function ContentPanda() {
