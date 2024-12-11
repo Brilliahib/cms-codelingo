@@ -26,7 +26,7 @@ export default function HomeContent() {
           </Button>
           <div>
             <Image
-              src={"/images/mascot.png"}
+              src={"/images/panda.gif"}
               alt="Charing Cub"
               width={1000}
               height={1000}

@@ -1,6 +1,7 @@
 import { MatchingPair } from "@/components/molecules/card/CardMatchingPairs";
 
 import flowchart from "/public/images/flowchart.gif";
+import pairs from "/public/images/pairs.gif";
 import Image from "next/image";
 
 export default function Reason() {
@@ -11,12 +12,14 @@ export default function Reason() {
 
   return (
     <>
-      <div className="my-24">
+      <div className="my-24 flex flex-col items-center">
         <h1 className="text-green-500 font-bold text-2xl tracking-wider text-center">
           Kenapa Memilih CodeLingo?
         </h1>
         <div className="my-24">
-          <MatchingPair pairs={matches} />
+          {/* pengganti dengan GIF aja sekarang mah */}
+          {/* <MatchingPair pairs={matches} /> */}
+          <Image src={pairs} alt="pairs" width={500} height={500} />
         </div>
         <div className="flex flex-col items-center space-y-4 pb-8">
           <h1 className="text-[#38B5FC] text-2xl font-bold">
