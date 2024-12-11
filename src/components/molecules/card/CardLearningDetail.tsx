@@ -17,6 +17,7 @@ export default function CardLearningDetail({ id }: CardLearningDetailProps) {
     { id, token: session?.access_token as string },
     { enabled: status === "authenticated" }
   );
+
   return (
     <>
       <div className="md:space-y-12 space-y-4">
@@ -34,33 +35,47 @@ export default function CardLearningDetail({ id }: CardLearningDetailProps) {
         </Link>
         <div className="md:space-y-6 space-y-4">
           <h1 className="font-bold text-2xl">Teruskan Belajar</h1>
-          <Progress value={40} />
-          <p>40% Progress Belajar</p>
+          <Progress value={data?.data.progress_status} />
+          <p>{data?.data.progress_status}% Progress Belajar</p>
         </div>
         <div className="relative flex justify-center items-center w-full">
           <div className="relative w-1/2">
-            {data?.data.user_materials.map((material, index) => {
+            {[
+              ...(data?.data.user_materials || []),
+              ...(data?.data.user_quizzes || []),
+            ].map((item, index) => {
               const top = index * 80;
               const isRight = index % 2 === 0;
               const left = isRight
                 ? `${20 + (index % 3) * 20}%`
                 : `${60 - (index % 3) * 20}%`;
 
-              const bgColor = material.is_unlocked
-                ? "bg-primary"
-                : "bg-gray-500";
-              const borderColor = material.is_unlocked
+              const bgColor = item.is_unlocked ? "bg-primary" : "bg-gray-500";
+              const borderColor = item.is_unlocked
                 ? "border-blue-700"
                 : "border-gray-700";
 
-              const Icon = material.is_completed
+              const Icon = item.is_completed
                 ? Check
-                : material.is_unlocked
+                : item.is_unlocked
                 ? Play
                 : BookOpen;
 
-              const MaterialLink = material.is_unlocked ? (
-                <Link href={`/materials/${material.id}`}>
+              let title: string | undefined;
+              let link: string | undefined;
+
+              if ("material_id" in item) {
+                title = item.material_id
+                  ? `Material ${item.material_id}`
+                  : undefined;
+                link = `/materials/${item.material_id}`;
+              } else if ("quiz_id" in item) {
+                title = item.quiz_id ? `Quiz ${item.quiz_id}` : undefined;
+                link = `/quizzes/${item.quiz_id}`;
+              }
+
+              const MaterialOrQuizLink = item.is_unlocked ? (
+                <Link href={link || "#"}>
                   <div className="flex flex-col items-center space-y-2">
                     <div
                       className={`p-4 rounded-full ${bgColor} w-fit border-b-8 ${borderColor}`}
@@ -81,11 +96,11 @@ export default function CardLearningDetail({ id }: CardLearningDetailProps) {
 
               return (
                 <div
-                  key={material.id}
+                  key={item.id}
                   className="absolute transition-all duration-300"
                   style={{ top: `${top}px`, left }}
                 >
-                  {MaterialLink}
+                  {MaterialOrQuizLink}
                 </div>
               );
             })}

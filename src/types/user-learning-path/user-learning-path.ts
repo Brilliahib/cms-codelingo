@@ -9,13 +9,23 @@ export interface UserLearningPath {
   progress_status: number;
   learning_path: Learning;
   user_materials: UserMaterials[];
-  user_quizzes: string;
+  user_quizzes: UserQuizzes[];
 }
 
 export interface UserMaterials {
   id: number;
   user_learning_path_id: number;
   material_id: number;
+  is_completed: boolean;
+  is_unlocked: boolean;
+  created_at: Date;
+  updated_at: Date;
+}
+
+export interface UserQuizzes {
+  id: number;
+  user_learning_path_id: number;
+  quiz_id: number;
   is_completed: boolean;
   is_unlocked: boolean;
   created_at: Date;
