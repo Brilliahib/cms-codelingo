@@ -1,33 +1,37 @@
-import { Learning } from "../learning/learning";
-
 export interface UserLearningPath {
+  learning_details: LearningDetail;
+  learning_items: (Material | Quiz)[];
+}
+
+export interface LearningDetail {
   id: number;
   user_id: number;
-  learning_path_id: number;
-  created_at: Date;
-  updated_at: Date;
+  title: string;
+  learning_path_id: string;
   progress_status: number;
-  learning_path: Learning;
-  user_materials: UserMaterials[];
-  user_quizzes: UserQuizzes[];
-}
-
-export interface UserMaterials {
-  id: number;
-  user_learning_path_id: number;
-  material_id: number;
-  is_completed: boolean;
-  is_unlocked: boolean;
   created_at: Date;
   updated_at: Date;
 }
 
-export interface UserQuizzes {
-  id: number;
-  user_learning_path_id: number;
-  quiz_id: number;
+export interface Material {
+  id: string;
+  type: "material";
+  title: string;
   is_completed: boolean;
   is_unlocked: boolean;
   created_at: Date;
   updated_at: Date;
+  material_image: string;
+  material_text: string;
+}
+
+export interface Quiz {
+  id: string;
+  type: "quiz";
+  title: string;
+  is_completed: boolean;
+  is_unlocked: boolean;
+  created_at: Date;
+  updated_at: Date;
+  quiz_description: string;
 }

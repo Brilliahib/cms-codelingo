@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface QuizDetailParams {
-  id: number;
+  id: string;
 }
 
 export default function QuizDetailContent({ id }: QuizDetailParams) {
@@ -39,13 +39,15 @@ export default function QuizDetailContent({ id }: QuizDetailParams) {
     { enabled: learningPathId !== null }
   );
 
-  const [currentQuizId, setCurrentQuizId] = useState<number>(id);
+  const [currentQuizId, setCurrentQuizId] = useState<string>(id);
 
   const quiz = question?.data || [];
-  const currentIndex = quiz.findIndex((item) => item.id === currentQuizId);
+  const currentIndex = quiz.findIndex(
+    (item) => item.id.toString() === currentQuizId
+  );
   const goToMaterial = (index: number) => {
     if (index >= 0 && index < quiz.length) {
-      const quizId = quiz[index].id;
+      const quizId = quiz[index].id.toString();
       setCurrentQuizId(quizId);
       router.push(`/quizzes/${quizId}`);
     }
