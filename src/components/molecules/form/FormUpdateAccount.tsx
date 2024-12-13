@@ -66,7 +66,7 @@ export default function FormUpdateAccount({ session }: SettingProfileProps) {
       <div>
         <Form {...form}>
           <form
-            className="space-y-5 pt-4"
+            className="space-y-5 md:space-y-8 pt-4"
             onSubmit={form.handleSubmit(onSubmit)}
           >
             <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
@@ -127,7 +127,7 @@ export default function FormUpdateAccount({ session }: SettingProfileProps) {
             />
             <div className="flex justify-between md:pt-6 pt-4">
               <Link
-                href={"/dashboard/profile/change-password"}
+                href={"/dashboard/profile/settings/password"}
                 className="text-primary font-bold hover:underline uppercase"
               >
                 Ubah Password
