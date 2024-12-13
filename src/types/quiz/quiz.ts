@@ -21,3 +21,9 @@ export interface Answer {
   answer_text: string;
   is_correct: boolean;
 }
+
+export interface SubmitQuestionResult {
+  is_correct: boolean;
+  earned_exp: number;
+  correct_answer: Answer;
+}
