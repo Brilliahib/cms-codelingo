@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { useAddSubmitQuestion } from "@/http/(user)/learning/quiz/add-submit-question";
 import { useGetAllQuestion } from "@/http/(user)/learning/quiz/get-all-question";
 import { useGetQuestionDetail } from "@/http/(user)/learning/quiz/get-detail-question";
 import { ArrowLeft, ArrowRight, X } from "lucide-react";
@@ -12,7 +13,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface QuizDetailParams {
-  id: number;
+  id: string;
 }
 
 export default function QuizDetailContent({ id }: QuizDetailParams) {
@@ -39,63 +40,96 @@ export default function QuizDetailContent({ id }: QuizDetailParams) {
     { enabled: learningPathId !== null }
   );
 
-  const [currentQuizId, setCurrentQuizId] = useState<number>(id);
+  const [currentQuizId, setCurrentQuizId] = useState<string>(id);
+  const [correctAnswer, setCorrectAnswer] = useState<string | null>(null);
+  const [submittedAnswer, setSubmittedAnswer] = useState<string | null>(null);
+  const [isAnswerSubmitted, setIsAnswerSubmitted] = useState<boolean>(false);
 
   const quiz = question?.data || [];
-  const currentIndex = quiz.findIndex((item) => item.id === currentQuizId);
+  const currentIndex = quiz.findIndex(
+    (item) => item.id.toString() === currentQuizId
+  );
+
   const goToMaterial = (index: number) => {
     if (index >= 0 && index < quiz.length) {
-      const quizId = quiz[index].id;
+      const quizId = quiz[index].id.toString();
       setCurrentQuizId(quizId);
       router.push(`/quizzes/${quizId}`);
     }
   };
 
+  const { mutate: submitQuestion, isPending: isSubmitting } =
+    useAddSubmitQuestion(currentQuizId, {
+      onSuccess: (data) => {
+        const selectedAnswer = data?.data.correct_answer.answer_text;
+        setCorrectAnswer(data?.data.correct_answer.answer_text);
+        setSubmittedAnswer(selectedAnswer);
+        setIsAnswerSubmitted(true);
+      },
+      onError: (error) => {
+        console.error("Error submitting question:", error);
+      },
+    });
+
   return (
-    <>
-      <div className="min-h-screen flex flex-col pt-12">
-        <div className="flex-1 md:space-y-12 space-y-8 pad-x">
-          <div className="flex items-center gap-4 md:gap-8">
-            <Link href={"/dashboard/learning"}>
-              <X className="cursor-pointer" />
-            </Link>
-            <Progress value={((currentIndex + 1) / quiz.length) * 100} />
-          </div>
+    <div className="min-h-screen flex flex-col pt-12">
+      <div className="flex-1 md:space-y-12 space-y-8 pad-x">
+        <div className="flex items-center gap-4 md:gap-8">
+          <Link href={"/dashboard/learning"}>
+            <X className="cursor-pointer" />
+          </Link>
+          <Progress value={((currentIndex + 1) / quiz.length) * 100} />
+        </div>
+        <div>
+          <h1 className="font-bold text-3xl uppercase">Quiz</h1>
+        </div>
+        <div className="grid grid-cols-1 md:gap-12 gap-8">
           <div>
-            <h1 className="font-bold text-3xl uppercase">Quiz</h1>
-          </div>
-          <div className="grid grid-cols-1 md:gap-12 gap-8">
-            <div>
-              <h1 className="font-bold text-2xl">{data?.data.question_text}</h1>
-            </div>
-          </div>
-          <div className="grid md:grid-cols-2 md:gap-x-12 md:gap-y-6 gap-8">
-            {data?.data.answers.map((answer) => (
-              <Card
-                key={answer.id}
-                className="bg-[#273856] rounded-2xl text-white border-[#1D2941] font-semibold text-xl border-b-8 border-r-8 text-center"
-              >
-                <CardContent className="p-8">{answer.answer_text}</CardContent>
-              </Card>
-            ))}
+            <h1 className="font-bold text-2xl">{data?.data.question_text}</h1>
           </div>
         </div>
-        <div className="flex justify-between items-end pad-x pb-8">
-          <Button
-            variant={"background"}
-            onClick={() => goToMaterial(currentIndex - 1)}
-            disabled={currentIndex <= 0}
-          >
-            <ArrowLeft /> Sebelumnya
-          </Button>
-          <Button
-            onClick={() => goToMaterial(currentIndex + 1)}
-            disabled={currentIndex >= quiz.length - 1}
-          >
-            Selanjutnya <ArrowRight />
-          </Button>
+        <div className="grid md:grid-cols-2 md:gap-x-12 md:gap-y-6 gap-8">
+          {data?.data.answers.map((answer) => (
+            <Card
+              key={answer.id}
+              className={`bg-[#273856] rounded-2xl text-white border-[#1D2941] font-semibold text-xl border-b-8 border-r-8 text-center cursor-pointer hover:bg-primary hover:border-secondary ${
+                isSubmitting ? "opacity-50 pointer-events-none" : ""
+              } ${
+                isAnswerSubmitted && answer.answer_text === correctAnswer
+                  ? "bg-green-500 border-green-700"
+                  : ""
+              } ${
+                isAnswerSubmitted &&
+                answer.answer_text !== correctAnswer &&
+                answer.answer_text === submittedAnswer
+                  ? "bg-red-500 border-red-700"
+                  : ""
+              }`}
+              onClick={() =>
+                !isAnswerSubmitted &&
+                submitQuestion({
+                  user_id: session?.user.id as number,
+                  answer_id: answer.id.toString(),
+                })
+              }
+            >
+              <CardContent className="p-8">{answer.answer_text}</CardContent>
+            </Card>
+          ))}
         </div>
       </div>
-    </>
+      <div className="flex justify-end items-end pad-x pb-8">
+        <Button
+          onClick={() => goToMaterial(currentIndex + 1)}
+          disabled={
+            currentIndex >= quiz.length - 1 ||
+            isSubmitting ||
+            !isAnswerSubmitted
+          }
+        >
+          Selanjutnya <ArrowRight />
+        </Button>
+      </div>
+    </div>
   );
 }

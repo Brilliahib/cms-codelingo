@@ -27,7 +27,7 @@ export default function CardLearningDetail({ id }: CardLearningDetailProps) {
               <div className="flex gap-4 items-center">
                 <ArrowLeft />
                 <h1 className="font-bold text-2xl">
-                  {data?.data.learning_path.title}
+                  {data?.data.learning_details.title}
                 </h1>
               </div>
             </CardContent>
@@ -35,15 +35,12 @@ export default function CardLearningDetail({ id }: CardLearningDetailProps) {
         </Link>
         <div className="md:space-y-6 space-y-4">
           <h1 className="font-bold text-2xl">Teruskan Belajar</h1>
-          <Progress value={data?.data.progress_status} />
-          <p>{data?.data.progress_status}% Progress Belajar</p>
+          <Progress value={data?.data.learning_details.progress_status} />
+          <p>{data?.data.learning_details.progress_status}% Progress Belajar</p>
         </div>
         <div className="relative flex justify-center items-center w-full">
           <div className="relative w-1/2">
-            {[
-              ...(data?.data.user_materials || []),
-              ...(data?.data.user_quizzes || []),
-            ].map((item, index) => {
+            {data?.data.learning_items.map((item, index) => {
               const top = index * 80;
               const isRight = index % 2 === 0;
               const left = isRight
@@ -64,14 +61,12 @@ export default function CardLearningDetail({ id }: CardLearningDetailProps) {
               let title: string | undefined;
               let link: string | undefined;
 
-              if ("material_id" in item) {
-                title = item.material_id
-                  ? `Material ${item.material_id}`
-                  : undefined;
-                link = `/materials/${item.material_id}`;
-              } else if ("quiz_id" in item) {
-                title = item.quiz_id ? `Quiz ${item.quiz_id}` : undefined;
-                link = `/quizzes/${item.quiz_id}`;
+              if (item.type === "material") {
+                title = item.title;
+                link = `/materials/${item.id}`;
+              } else if (item.type === "quiz") {
+                title = item.title;
+                link = `/quizzes/${item.id}`;
               }
 
               const MaterialOrQuizLink = item.is_unlocked ? (

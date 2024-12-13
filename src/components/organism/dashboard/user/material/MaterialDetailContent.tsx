@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 interface MaterialDetailProps {
-  id: number;
+  id: string;
 }
 
 export default function MaterialDetailContent({ id }: MaterialDetailProps) {
@@ -25,7 +25,7 @@ export default function MaterialDetailContent({ id }: MaterialDetailProps) {
   );
   const router = useRouter();
   const { mutate: markCompleteMaterial } = useMarkCompleteMaterial();
-  const [currentMaterialId, setCurrentMaterialId] = useState<number>(id);
+  const [currentMaterialId, setCurrentMaterialId] = useState<string>(id);
 
   const [learningPathId, setLearningPathId] = useState<number | null>(null);
 
@@ -45,12 +45,12 @@ export default function MaterialDetailContent({ id }: MaterialDetailProps) {
 
   const materials = material?.data || [];
   const currentIndex = materials.findIndex(
-    (item) => item.id === currentMaterialId
+    (item) => item.id.toString() === currentMaterialId
   );
 
   const goToMaterial = (index: number) => {
     if (index >= 0 && index < materials.length) {
-      const materialId = materials[index].id;
+      const materialId = materials[index].id.toString();
       setCurrentMaterialId(materialId);
       router.push(`/materials/${materialId}`);
     }
@@ -58,16 +58,16 @@ export default function MaterialDetailContent({ id }: MaterialDetailProps) {
 
   const handleNextMaterial = () => {
     if (currentIndex < materials.length - 1) {
-      markCompleteMaterial(currentMaterialId.toString());
+      markCompleteMaterial(currentMaterialId);
       goToMaterial(currentIndex + 1);
     } else {
-      markCompleteMaterial(currentMaterialId.toString());
+      markCompleteMaterial(currentMaterialId);
     }
   };
 
   useEffect(() => {
     if (currentIndex === materials.length - 1) {
-      markCompleteMaterial(currentMaterialId.toString());
+      markCompleteMaterial(currentMaterialId);
     }
   }, [currentIndex, materials.length, currentMaterialId, markCompleteMaterial]);
 
@@ -75,10 +75,13 @@ export default function MaterialDetailContent({ id }: MaterialDetailProps) {
     <div className="min-h-screen flex flex-col pt-12">
       <div className="flex-1 md:space-y-12 space-y-8 pad-x">
         <div className="flex items-center gap-4 md:gap-8">
-          <Link href={"/dashboard/learning"}>
+          <Link href={"/dashboard/learning"} className="flex-shrink-0">
             <X className="cursor-pointer" />
           </Link>
           <Progress value={((currentIndex + 1) / materials.length) * 100} />
+          <p>
+            {currentIndex + 1}/{materials.length}
+          </p>
         </div>
         <div>
           <h1 className="font-bold text-3xl">{data?.data.title}</h1>
@@ -108,17 +111,7 @@ export default function MaterialDetailContent({ id }: MaterialDetailProps) {
           )}
         </div>
       </div>
-      <div
-        className="
-          flex
-          justify-between
-          items-center
-          md:static
-          fixed bottom-0 left-0 w-full
-          pad-x py-4
-          shadow-md md:bg-transparent bg-background
-        "
-      >
+      <div className="flex justify-between items-center md:static fixed bottom-0 left-0 w-full pad-x py-4 shadow-md md:bg-transparent bg-background">
         <Button
           variant={"background"}
           onClick={() => goToMaterial(currentIndex - 1)}

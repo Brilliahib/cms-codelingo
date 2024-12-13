@@ -8,7 +8,7 @@ export default async function QuizDetailPage({ params }: QuizDetailProps) {
   const { id } = await params;
   return (
     <>
-      <QuizDetailContent id={Number(id)} />
+      <QuizDetailContent id={id} />
     </>
   );
 }

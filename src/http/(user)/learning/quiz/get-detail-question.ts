@@ -5,7 +5,7 @@ import { api } from "@/lib/axios";
 import { Question } from "@/types/quiz/quiz";
 
 interface GetQuestionDetailParams {
-  id: number;
+  id: string;
   token: string;
 }
 

@@ -5,7 +5,7 @@ import { api } from "@/lib/axios";
 import { Material } from "@/types/material/material";
 
 interface GetMaterialDetailParams {
-  id: number;
+  id: string;
   token: string;
 }
 

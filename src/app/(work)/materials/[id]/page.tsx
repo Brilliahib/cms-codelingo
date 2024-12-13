@@ -10,7 +10,7 @@ export default async function MaterialDetailPage({
   const { id } = await params;
   return (
     <>
-      <MaterialDetailContent id={Number(id)} />
+      <MaterialDetailContent id={id} />
     </>
   );
 }
