@@ -2,10 +2,10 @@ import { UseQueryOptions, useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { api } from "@/lib/axios";
-import { UserLearningPath } from "@/types/user-learning-path/user-learning-path";
+import { AllUserLearningPath } from "@/types/user-learning-path/user-learning-path";
 
 interface GetUserLearningPathResponse {
-  data: UserLearningPath[];
+  data: AllUserLearningPath[];
 }
 
 export const getUserLearningPathHandler = async (
