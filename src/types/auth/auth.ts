@@ -4,5 +4,5 @@ export interface Auth {
   name: string;
   email: string;
   role: string;
-  profile: string;
+  image: string;
 }
