@@ -82,7 +82,9 @@ export default function QuizDetailContent({ id }: QuizDetailParams) {
     <div className="min-h-screen flex flex-col pt-12">
       <div className="flex-1 md:space-y-12 space-y-8 pad-x">
         <div className="flex items-center gap-4 md:gap-8">
-          <Link href={"/dashboard/learning"}>
+          <Link
+            href={`/dashboard/learning/${data?.data.user_learning_path_id}`}
+          >
             <X className="cursor-pointer" />
           </Link>
           <Progress value={((currentIndex + 1) / quiz.length) * 100} />

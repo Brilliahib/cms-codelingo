@@ -75,7 +75,10 @@ export default function MaterialDetailContent({ id }: MaterialDetailProps) {
     <div className="min-h-screen flex flex-col pt-12">
       <div className="flex-1 md:space-y-12 space-y-8 pad-x">
         <div className="flex items-center gap-4 md:gap-8">
-          <Link href={"/dashboard/learning"} className="flex-shrink-0">
+          <Link
+            href={`/dashboard/learning/${data?.data.user_learning_path_id}`}
+            className="flex-shrink-0"
+          >
             <X className="cursor-pointer" />
           </Link>
           <Progress value={((currentIndex + 1) / materials.length) * 100} />
