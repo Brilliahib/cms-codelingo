@@ -131,11 +131,13 @@ const RankingLeaderboard: React.FC<CardProfileLeaderboardProps> = ({
                     width={1000}
                     src={player.image ?? "/images/profile/general.png"}
                     alt={`${activeLeague} Tier ${player.id}`}
-                    className="h-12 w-12 rounded-full"
+                    className="h-16 w-16 rounded-full"
                   />
                   <div className="flex-grow">
-                    <div className="font-medium">{player.name}</div>
-                    <div className="text-gray-400">#{player.username}</div>
+                    <div className="font-semibold">{player.name}</div>
+                    <div className="text-gray-400 font-semibold">
+                      #{player.username}
+                    </div>
                   </div>
                   <Badge className="text-yellow-300">
                     {player.exp.toLocaleString()} XP

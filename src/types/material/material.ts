@@ -5,4 +5,5 @@ export interface Material {
   material_image: string;
   material_text: string;
   type: string;
+  user_learning_path_id: number;
 }
