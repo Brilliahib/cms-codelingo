@@ -7,13 +7,13 @@ import Navbar from "@/components/organism/navbar/Navbar";
 
 export default function Home() {
   return (
-    <>
+    <div className="scroll-smooth">
       <Navbar />
       <HomeContent />
       <ContentPanda />
       <Reason />
       <TungguApaLagi />
       <Footer />
-    </>
+    </div>
   );
 }

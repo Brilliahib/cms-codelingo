@@ -5,7 +5,7 @@ import { Zap } from "lucide-react";
 export default function ContentPanda() {
   return (
     <>
-      <div className="bg-[#273856] w-full flex flex-col md:flex-row items-center justify-center gap-12 p-8">
+      <div className="bg-[#273856] w-full flex flex-col md:flex-row items-center justify-center gap-16 py-12  ">
         <Image
           src={learnPanda}
           alt="learn panda"
@@ -13,10 +13,10 @@ export default function ContentPanda() {
           height="200"
           className="w-1/8"
         />
-        <div className="md:w-6/12 text-justify">
+        <div className="md:w-6/12 text-justify space-y-6">
           <div className="flex items-center gap-4">
-            <Zap className="h-10 w-10 text-yellow-400" fill="currentColor" />
-            <h1 className="font-bold tracking-wider text-primary md:text-xl text-lg">
+            <Image src={"/images/zap.svg"} alt="Petir" width={32} height={32}/>
+            <h1 className="font-bold tracking-wider text-primary md:text-xl text-2xl">
               Belajar Mulai dari Dasar hingga Mahir
             </h1>
           </div>
@@ -28,6 +28,7 @@ export default function ContentPanda() {
             permainan yang seru!
           </p>
         </div>
+        <div id="our-service"></div>
       </div>
     </>
   );
