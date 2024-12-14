@@ -15,16 +15,9 @@ import { Quiz } from "@/types/quiz/quiz";
 export const quizColumns: ColumnDef<Quiz>[] = [
   {
     accessorKey: "id",
-    header: "ID",
+    header: "No",
     cell: ({ row }) => {
-      return <p suppressHydrationWarning>{row.original.id}</p>;
-    },
-  },
-  {
-    accessorKey: "learning_path_id",
-    header: "Learning Path ID",
-    cell: ({ row }) => {
-      return <p suppressHydrationWarning>{row.original.learning_path_id}</p>;
+      return <p suppressHydrationWarning>{row.index + 1}</p>;
     },
   },
   {
@@ -51,11 +44,11 @@ export const quizColumns: ColumnDef<Quiz>[] = [
   },
   {
     accessorKey: "type",
-    header: "Type",
+    header: "Learning Path",
     cell: ({ row }) => {
       return (
         <p suppressHydrationWarning className="md:line-clamp-2 line-clamp-1">
-          {row.original.type}
+          {row.original.learning_path.title}
         </p>
       );
     },
