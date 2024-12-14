@@ -1,5 +1,8 @@
 export interface User {
-  league: string;
-  rank: number;
+  id: number;
+  name: string;
+  username: string;
   exp: number;
+  level: number;
+  league: string;
 }
