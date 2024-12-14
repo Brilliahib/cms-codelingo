@@ -13,7 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { generateFallbackFromName } from "@/utils/misc";
 import { signOut, useSession } from "next-auth/react";
 
@@ -32,6 +32,9 @@ export default function NavButton({ links }: NavHeaderProps) {
               <DropdownMenuTrigger asChild>
                 <Button variant="tertiary" size="icon" className="rounded-full">
                   <Avatar className="border border-muted">
+                    <AvatarImage
+                      src={session.user.image ?? "/images/profile/general.png"}
+                    />
                     <AvatarFallback className="text-gray-700">
                       {generateFallbackFromName(session.user.name)}
                     </AvatarFallback>
@@ -45,7 +48,7 @@ export default function NavButton({ links }: NavHeaderProps) {
                 <p>{session.user.name}</p>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem asChild className="cursor-pointer">
+              <DropdownMenuItem asChild className="cursor-pointer text-white">
                 <Link href="/dashboard">
                   <LayoutDashboard /> Dashboard
                 </Link>
@@ -76,9 +79,9 @@ export default function NavButton({ links }: NavHeaderProps) {
             <Button
               variant="outline"
               size="icon"
-              className="shrink-0 md:hidden bg-white border-0"
+              className="shrink-0 md:hidden border-0"
             >
-              <Menu className="h-5 w-5" />
+              <Menu className="h-5 w-5 text-white" />
               <span className="sr-only">Toggle navigation menu</span>
             </Button>
           </SheetTrigger>
@@ -91,9 +94,9 @@ export default function NavButton({ links }: NavHeaderProps) {
               >
                 <Image
                   src="/images/logo.png"
-                  alt="Charing Cub"
-                  width={80}
-                  height={80}
+                  alt="CodeLingo"
+                  width={180}
+                  height={180}
                 />
               </Link>
             </div>

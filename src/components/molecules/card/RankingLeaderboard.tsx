@@ -3,16 +3,16 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useLeaderboard } from "@/http/(user)/leaderboard/get-leaderboard"; // Pastikan path sesuai struktur proyek Anda
 import bronze from "/public/images/tier/bronze.svg";
 import diamond from "/public/images/tier/diamond.svg";
 import emerald from "/public/images/tier/emerald.svg";
 import gold from "/public/images/tier/gold.svg";
 import silver from "/public/images/tier/silver.svg";
 import { Card } from "@/components/ui/card";
-import profile from "/public/images/avatar.svg";
 import { Badge } from "@/components/ui/badge";
 import { Session } from "next-auth";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useLeaderboard } from "@/http/(user)/leaderboard/get-leaderboard";
 
 export interface CardProfileLeaderboardProps {
   session: Session;
@@ -61,9 +61,6 @@ const RankingLeaderboard: React.FC<CardProfileLeaderboardProps> = ({
     setActiveLeagueIndex((prevIndex) => (prevIndex + 1) % leagues.length);
   };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error loading data...</div>;
-
   return (
     <>
       <div className="flex flex-col justify-between items-center mb-4">
@@ -96,40 +93,57 @@ const RankingLeaderboard: React.FC<CardProfileLeaderboardProps> = ({
       </div>
       <div>
         <div className="space-y-4">
-          {players.map((player, index) => (
-            <Card
-              key={player.id}
-              className="flex items-center gap-4 p-4 hover:bg-gray-800 rounded-md transition-colors"
-            >
-              <h1
-                className={`rounded-full flex items-center font-bold justify-center h-8 w-8 ${
-                  index + 1 === 1
-                    ? "bg-yellow-300 text-[#1D2941]"
-                    : index + 1 === 2
-                    ? "bg-white/80 text-[#1D2941]"
-                    : index + 1 === 3
-                    ? "bg-orange-500 text-[#1D2941]"
-                    : "bg-[#273856] text-white"
-                }`}
-              >
-                {index + 1}
-              </h1>
-              <Image
-                height={32}
-                width={32}
-                src={profile}
-                alt={`${activeLeague} Tier ${player.id}`}
-                className="h-12 w-12"
-              />
-              <div className="flex-grow">
-                <div className="font-medium">{player.name}</div>
-                <div className="text-gray-400">#{player.username}</div>
-              </div>
-              <Badge className="text-yellow-300">
-                {player.exp.toLocaleString()} XP
-              </Badge>
-            </Card>
-          ))}
+          {isLoading
+            ? [...Array(3)].map((_, index) => (
+                <Card
+                  key={index}
+                  className="flex items-center gap-4 p-4 hover:bg-gray-800 rounded-md transition-colors"
+                >
+                  <Skeleton className="w-8 h-8 rounded-full" />
+                  <Skeleton className="w-12 h-12 rounded-full" />
+                  <div className="flex-grow space-y-2">
+                    <Skeleton className="w-32 h-4" />
+                    <Skeleton className="w-24 h-4" />
+                  </div>
+                  <Skeleton className="w-16 h-6 rounded-md" />
+                </Card>
+              ))
+            : players.map((player, index) => (
+                <Card
+                  key={player.id}
+                  className="flex items-center gap-4 p-4 hover:bg-gray-800 rounded-md transition-colors"
+                >
+                  <h1
+                    className={`rounded-full flex items-center font-bold justify-center h-8 w-8 ${
+                      index + 1 === 1
+                        ? "bg-yellow-300 text-[#1D2941]"
+                        : index + 1 === 2
+                        ? "bg-white/80 text-[#1D2941]"
+                        : index + 1 === 3
+                        ? "bg-orange-500 text-[#1D2941]"
+                        : "bg-[#273856] text-white"
+                    }`}
+                  >
+                    {index + 1}
+                  </h1>
+                  <Image
+                    height={1000}
+                    width={1000}
+                    src={player.image ?? "/images/profile/general.png"}
+                    alt={`${activeLeague} Tier ${player.id}`}
+                    className="h-16 w-16 rounded-full"
+                  />
+                  <div className="flex-grow">
+                    <div className="font-semibold">{player.name}</div>
+                    <div className="text-gray-400 font-semibold">
+                      #{player.username}
+                    </div>
+                  </div>
+                  <Badge className="text-yellow-300">
+                    {player.exp.toLocaleString()} XP
+                  </Badge>
+                </Card>
+              ))}
         </div>
       </div>
     </>

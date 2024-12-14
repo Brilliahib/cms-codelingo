@@ -1,6 +1,6 @@
 import CardAchievement from "@/components/molecules/card/CardAchievement";
 import CardDailyMission from "@/components/molecules/card/CardDailyMission";
-import CardProfile from "@/components/molecules/card/CardProfile";
+import CardLearningProgress from "@/components/molecules/card/CardLearningProgress";
 import CardStatistics from "@/components/molecules/card/CardStatistics";
 import CardUserProfile from "@/components/molecules/card/CardUserProfile";
 import { authOptions } from "@/lib/auth";
@@ -17,8 +17,8 @@ export default async function ProfileDashboardWrapper() {
           <CardAchievement />
         </div>
         <div className="md:w-4/12 w-full space-y-6">
-          <CardProfile session={session!} />
           <CardDailyMission />
+          <CardLearningProgress />
         </div>
       </div>
     </>
