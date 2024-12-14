@@ -13,7 +13,13 @@ export default function CardUserProfile({ session }: CardUserProfileProps) {
     <>
       <div className="flex justify-between">
         <div className="flex flex-row items-center gap-8">
-          <Image src={profile} alt="profile" height={100} width={100} />
+          <Image
+            src={session.user.image ?? "/images/profile/general.png"}
+            alt="profile"
+            height={100}
+            width={100}
+            className="rounded-full"
+          />
           <div>
             <h1 className="text-2xl font-bold">{session.user.name}</h1>
             <h1 className="text-xl opacity-80">#{session.user.username}</h1>

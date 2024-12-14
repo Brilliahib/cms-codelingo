@@ -11,7 +11,7 @@ export default async function SettingProfileDashboardWrapper() {
     <>
       <div className="flex flex-col md:flex-row md:gap-12 gap-8">
         <div className="md:w-8/12 w-full space-y-6">
-          <CardPhotoProfile />
+          <CardPhotoProfile session={session!} />
           <FormUpdateAccount session={session!} />
         </div>
         <div className="md:w-4/12 w-full space-y-6">

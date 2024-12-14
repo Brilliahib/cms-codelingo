@@ -1,15 +1,21 @@
+import { Session } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function CardPhotoProfile() {
+interface CardPhotoProfileParams {
+  session: Session;
+}
+
+export default function CardPhotoProfile({ session }: CardPhotoProfileParams) {
   return (
     <>
       <div className="flex flex-col items-center justify-center lg:space-y-6 space-y-4">
         <Image
-          src="/images/profile.png"
+          src={session.user.image ?? "/images/profile/general.png"}
           alt="profile"
           height={100}
           width={100}
+          className="rounded-full"
         />
         <div>
           <Link

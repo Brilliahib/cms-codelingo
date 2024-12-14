@@ -66,11 +66,11 @@ export default function CardProfile({ session }: CardProfileProps) {
             <>
               <div className="flex items-center md:gap-6 gap-4">
                 <Image
-                  src="/images/avatar.svg"
+                  src={session.user.image ?? "/images/profile/general.png"}
                   alt="Profile"
                   width={1000}
                   height={1000}
-                  className="w-20 h-20"
+                  className="w-20 h-20 rounded-full"
                 />
                 <div className="space-y-2">
                   <h1 className="font-bold text-xl">{session.user.name}</h1>
