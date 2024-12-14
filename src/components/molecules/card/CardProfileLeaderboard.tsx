@@ -46,7 +46,6 @@ export default function CardProfileLeaderboard({
   return (
     <>
       <div className="flex flex-col lg:flex-row gap-4 mb-12">
-        {/* Profile Card */}
         <Card className="w-full lg:w-3/4 p-4 flex flex-col lg:flex-row justify-start gap-4 items-center">
           <Image
             src={session.user.image ?? "/images/profile/general.png"}
