@@ -5,15 +5,15 @@ import { Zap } from "lucide-react";
 export default function ContentPanda() {
   return (
     <>
-      <div className="bg-[#273856] w-full flex flex-col md:flex-row items-center justify-center gap-12 p-8">
+      <div className="bg-[#273856] w-full flex flex-col md:flex-row items-center justify-center gap-12 pad-x md:py-16 py-12">
         <Image
           src={learnPanda}
           alt="learn panda"
-          width="200"
-          height="200"
-          className="w-1/8"
+          width="1000"
+          height="1000"
+          className="md:max-w-[300px] max-w-[200px]"
         />
-        <div className="md:w-6/12 text-justify">
+        <div className="md:w-6/12 text-justify space-y-4">
           <div className="flex items-center gap-4">
             <Zap className="h-10 w-10 text-yellow-400" fill="currentColor" />
             <h1 className="font-bold tracking-wider text-primary md:text-xl text-lg">
