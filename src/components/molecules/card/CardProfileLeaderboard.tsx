@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Session } from "next-auth";
@@ -8,6 +10,7 @@ import gold from "/public/images/tier/gold.svg";
 import emerald from "/public/images/tier/emerald.svg";
 import diamond from "/public/images/tier/diamond.svg";
 import RankingLeaderboard from "./RankingLeaderboard";
+import { useGetStatistics } from "@/http/(user)/profile/get-statistics";
 
 export interface CardProfileLeaderboardProps {
   session: Session;
@@ -16,6 +19,13 @@ export interface CardProfileLeaderboardProps {
 export default function CardProfileLeaderboard({
   session,
 }: CardProfileLeaderboardProps) {
+  const { data, isPending } = useGetStatistics(
+    session?.access_token as string,
+    { enabled: !!session?.access_token }
+  );
+
+  const statistics = data?.data;
+
   const getTierIcon = (tier: string) => {
     switch (tier) {
       case "bronze":
@@ -32,6 +42,7 @@ export default function CardProfileLeaderboard({
         return bronze;
     }
   };
+
   return (
     <>
       <div className="flex flex-col lg:flex-row gap-4 mb-12">
@@ -51,10 +62,12 @@ export default function CardProfileLeaderboard({
               #{session.user.username}
             </h1>
             <Badge className="text-yellow-300 text-md lg:text-lg font-bold">
-              {session.user.exp} XP
+              {statistics?.exp ?? 0} XP
             </Badge>
           </div>
         </Card>
+
+        {/* Rank Card */}
         <Card className="w-full lg:w-1/4 flex flex-col items-center justify-center">
           <div className="space-y-4">
             <h1 className="font-bold text-lg lg:text-base text-center">
@@ -62,12 +75,14 @@ export default function CardProfileLeaderboard({
             </h1>
             <div className="flex flex-row gap-2 items-center justify-center">
               <Image
-                src={getTierIcon(session.user.league)}
-                alt={session.user.league}
+                src={getTierIcon(statistics?.league ?? "bronze")}
+                alt={statistics?.league ?? "bronze"}
                 width={80}
                 height={80}
               />
-              <h1 className="font-bold text-xl lg:text-2xl">6th</h1>
+              <h1 className="font-bold text-xl lg:text-2xl">
+                {statistics?.rank ?? "-"}
+              </h1>
             </div>
           </div>
         </Card>
