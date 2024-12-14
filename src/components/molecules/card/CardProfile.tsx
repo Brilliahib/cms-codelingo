@@ -2,6 +2,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Session } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
@@ -31,17 +32,6 @@ export default function CardProfile({ session }: CardProfileProps) {
     enabled: !!session.access_token,
   });
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError || !data) {
-    return <div>Error: Tidak dapat memuat data liga.</div>;
-  }
-
-  const currentLeagueImage = leagueImages[data.current_league];
-  const nextLeagueImage = leagueImages[data.next_league];
-
   return (
     <Card className="bg-transparent border">
       <CardContent className="p-8">
@@ -55,36 +45,57 @@ export default function CardProfile({ session }: CardProfileProps) {
               Lihat Semua
             </Link>
           </div>
-          <div className="flex items-center md:gap-6 gap-4">
-            <Image
-              src="/images/avatar.svg"
-              alt="Profile"
-              width={1000}
-              height={1000}
-              className="w-20 h-20"
-            />
-            <div className="space-y-2">
-              <h1 className="font-bold text-xl">{session.user.name}</h1>
-              <p className="font-semibold uppercase tracking-wider">
-                Liga {data.current_league}
-              </p>
+          {isLoading ? (
+            <div className="space-y-6">
+              <div className="flex items-center md:gap-6 gap-4">
+                <Skeleton className="w-20 h-20 rounded-full" />
+                <div className="space-y-2">
+                  <Skeleton className="h-6 w-40" />
+                  <Skeleton className="h-4 w-32" />
+                </div>
+              </div>
+              <div className="flex gap-4 items-center">
+                <Skeleton className="h-12 w-12 rounded-full flex-shrink-0" />
+                <Skeleton className="h-6 w-full rounded-full" />
+                <Skeleton className="h-12 w-12 rounded-full flex-shrink-0" />
+              </div>
             </div>
-          </div>
-          <div className="flex gap-4 items-center">
-            <Image
-              src={currentLeagueImage}
-              alt={data.current_league}
-              height={50}
-              width={50}
-            />
-            <Progress type="league" value={data.progress} />
-            <Image
-              src={nextLeagueImage}
-              alt={data.next_league}
-              height={50}
-              width={50}
-            />
-          </div>
+          ) : isError || !data ? (
+            <div>Tidak dapat memuat liga</div>
+          ) : (
+            <>
+              <div className="flex items-center md:gap-6 gap-4">
+                <Image
+                  src="/images/avatar.svg"
+                  alt="Profile"
+                  width={1000}
+                  height={1000}
+                  className="w-20 h-20"
+                />
+                <div className="space-y-2">
+                  <h1 className="font-bold text-xl">{session.user.name}</h1>
+                  <p className="font-semibold uppercase tracking-wider">
+                    Liga {data.current_league}
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4 items-center">
+                <Image
+                  src={leagueImages[data.current_league]}
+                  alt={data.current_league}
+                  height={50}
+                  width={50}
+                />
+                <Progress type="league" value={data.progress} />
+                <Image
+                  src={leagueImages[data.next_league]}
+                  alt={data.next_league}
+                  height={50}
+                  width={50}
+                />
+              </div>
+            </>
+          )}
         </div>
       </CardContent>
     </Card>

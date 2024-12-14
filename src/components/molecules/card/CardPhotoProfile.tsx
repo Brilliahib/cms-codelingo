@@ -13,7 +13,7 @@ export default function CardPhotoProfile() {
         />
         <div>
           <Link
-            href={"/dashboard/profile/avatar"}
+            href={"/dashboard/profile/settings/avatar"}
             className="uppercase text-primary font-bold text-xl hover:underline"
           >
             Ubah Avatar
