@@ -1,17 +1,14 @@
-<<<<<<< HEAD
+
 import { MatchingPair } from "@/components/molecules/card/CardMatchingPairs";
 "use client";
 
 import { useEffect } from "react";
-=======
->>>>>>> 768737113bd4868b4b6e6cb8a035df0724546e2f
 import flowchart from "/public/images/flowchart.gif";
 import pairs from "/public/images/pairs.gif";
 import liga from "/public/images/liga.gif";
 import Image from "next/image";
 
 export default function Reason() {
-<<<<<<< HEAD
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -47,7 +44,6 @@ export default function Reason() {
           leaderboard yang akan meningkatkan rasa percaya diri dan semangat anak
           untuk menyelesaikan tantangan berikutnya.
         </p>
-=======
   return (
     <>
       <div className="my-24 flex flex-col items-center pad-x md:space-y-8 space-y-4">
@@ -91,7 +87,6 @@ export default function Reason() {
             </p>
           </div>
         </div>
->>>>>>> 768737113bd4868b4b6e6cb8a035df0724546e2f
       </div>
 
       {/* Section 2 */}
