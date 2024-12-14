@@ -1,17 +1,17 @@
 "use client";
 
-import { quizColumns } from "@/components/atoms/datacolumn/DataQuiz";
+import { materialColumns } from "@/components/atoms/datacolumn/DataMaterial";
 import SearchInput from "@/components/atoms/search/SearchInput";
 import { DataTable } from "@/components/molecules/datatable/DataTable";
 import { Button } from "@/components/ui/button";
-import { useGetAllQuizAdmin } from "@/http/(admin)/quiz/get-all-quiz";
+import { useGetAllMaterialAdmin } from "@/http/(admin)/material/get-all-material";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function QuizzesDashboardAdminWrapper() {
+export default function MaterialsDashboardAdminWrapper() {
   const { data: session, status } = useSession();
-  const { data, isPending } = useGetAllQuizAdmin(
+  const { data, isPending } = useGetAllMaterialAdmin(
     session?.access_token as string,
     {
       enabled: status === "authenticated",
@@ -31,13 +31,13 @@ export default function QuizzesDashboardAdminWrapper() {
           <SearchInput
             onSearch={setSearchQuery}
             className="min-w-[250px]"
-            props="Search Quiz..."
+            props="Search Materials..."
           />
-          <Link href={"/dashboard/admin/quiz/create"}>
-            <Button>Tambah Quiz</Button>
+          <Link href={"/dashboard/admin/material/create"}>
+            <Button>Tambah Materials</Button>
           </Link>
         </div>
-        <DataTable columns={quizColumns} data={filteredData} />
+        <DataTable columns={materialColumns} data={filteredData} />
       </div>
     </>
   );
