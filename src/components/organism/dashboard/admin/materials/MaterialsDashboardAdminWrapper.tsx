@@ -33,7 +33,7 @@ export default function MaterialsDashboardAdminWrapper() {
             className="min-w-[250px]"
             props="Search Materials..."
           />
-          <Link href={"/dashboard/admin/material/create"}>
+          <Link href={"/dashboard/admin/materials/create"}>
             <Button>Tambah Materials</Button>
           </Link>
         </div>

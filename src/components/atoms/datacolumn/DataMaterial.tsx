@@ -16,9 +16,9 @@ import { baseUrl } from "@/utils/misc";
 export const materialColumns: ColumnDef<Material>[] = [
   {
     accessorKey: "id",
-    header: "ID",
+    header: "No",
     cell: ({ row }) => {
-      return <p suppressHydrationWarning>{row.original.id}</p>;
+      return <p suppressHydrationWarning>{row.index + 1}</p>;
     },
   },
   {
@@ -26,8 +26,19 @@ export const materialColumns: ColumnDef<Material>[] = [
     header: "Title",
     cell: ({ row }) => {
       return (
-        <p suppressHydrationWarning className="md:line-clamp-3 line-clamp-1">
+        <p suppressHydrationWarning className="md:line-clamp-2 line-clamp-1">
           {row.original.title}
+        </p>
+      );
+    },
+  },
+  {
+    accessorKey: "material_text",
+    header: "Material Text",
+    cell: ({ row }) => {
+      return (
+        <p suppressHydrationWarning className="md:line-clamp-2 line-clamp-1">
+          {row.original.material_text}
         </p>
       );
     },
@@ -37,28 +48,14 @@ export const materialColumns: ColumnDef<Material>[] = [
     header: "Material Image",
     cell: ({ row }) => {
       const imageUrl = row.original.material_image;
-      const isValidUrl =
-        imageUrl?.startsWith("http://") || imageUrl?.startsWith("https://");
       return (
         <Image
           src={`${baseUrl}/${row.original.material_image}`}
           alt={row.original.title}
           width={1000}
           height={1000}
-          className="rounded object-cover"
+          className="rounded object-cover max-w-[150px]"
         />
-      );
-    },
-  },
-
-  {
-    accessorKey: "material_text",
-    header: "Material Text",
-    cell: ({ row }) => {
-      return (
-        <p suppressHydrationWarning className="md:line-clamp-3 line-clamp-1">
-          {row.original.material_text}
-        </p>
       );
     },
   },

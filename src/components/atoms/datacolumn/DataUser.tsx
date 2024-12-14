@@ -15,9 +15,9 @@ import { User } from "@/types/user/user";
 export const userColumns: ColumnDef<User>[] = [
   {
     accessorKey: "id",
-    header: "ID",
+    header: "No",
     cell: ({ row }) => {
-      return <p suppressHydrationWarning>{row.original.id}</p>;
+      return <p suppressHydrationWarning>{row.index + 1}</p>;
     },
   },
   {
