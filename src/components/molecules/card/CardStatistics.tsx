@@ -45,7 +45,7 @@ export default function CardStatistics() {
             </div>
           </div>
           <Link
-            href={"#"}
+            href={"/dashboard/leaderboard"}
             className="text-sm font-bold uppercase text-primary hover:underline"
           >
             Lihat Semua
