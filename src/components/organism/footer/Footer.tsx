@@ -1,8 +1,8 @@
 export default function Footer() {
   return (
     <>
-      <footer className="text-white py-8 px-4">
-        <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between items-center">
+      <footer className="text-white py-8 px-4 pad-x">
+        <div className="pad-x flex flex-col md:flex-row justify-between items-center">
           <div className="text-center md:text-left">
             <h1 className="text-lg font-bold text-green-500">CodeLingo</h1>
             <p className="text-sm mt-2 w-full md:w-2/3 opacity-80">
