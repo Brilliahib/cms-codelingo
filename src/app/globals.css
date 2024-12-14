@@ -61,3 +61,9 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .pad-x {
+    @apply px-6 md:px-[6%] lg:px-[8%];
+  }
+}
