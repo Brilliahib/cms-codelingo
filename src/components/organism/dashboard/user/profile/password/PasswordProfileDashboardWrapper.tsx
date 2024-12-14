@@ -1,5 +1,5 @@
 import CardDailyMission from "@/components/molecules/card/CardDailyMission";
-import CardProfile from "@/components/molecules/card/CardProfile";
+import CardLearningProgress from "@/components/molecules/card/CardLearningProgress";
 import FormUpdatePassword from "@/components/molecules/form/FormUpdatePassword";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
@@ -13,8 +13,8 @@ export default async function PasswordProfileDashboardWrapper() {
           <FormUpdatePassword session={session!} />
         </div>
         <div className="md:w-4/12 w-full space-y-6">
-          <CardProfile session={session!} />
           <CardDailyMission />
+          <CardLearningProgress />
         </div>
       </div>
     </>

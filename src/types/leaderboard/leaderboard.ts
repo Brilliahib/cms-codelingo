@@ -1,7 +1,10 @@
 export interface LeaderboardPlayer {
   id: number;
-  name: string;
   username: string;
+  name: string;
+  email: string;
+  role: string;
+  image: string;
   exp: number;
   level: number;
   leagues: number;

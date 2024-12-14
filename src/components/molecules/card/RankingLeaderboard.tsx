@@ -115,11 +115,11 @@ const RankingLeaderboard: React.FC<CardProfileLeaderboardProps> = ({
                 {index + 1}
               </h1>
               <Image
-                height={32}
-                width={32}
-                src={profile}
+                height={1000}
+                width={1000}
+                src={player.image ?? "/images/profile/general.png"}
                 alt={`${activeLeague} Tier ${player.id}`}
-                className="h-12 w-12"
+                className="h-12 w-12 rounded-full"
               />
               <div className="flex-grow">
                 <div className="font-medium">{player.name}</div>
