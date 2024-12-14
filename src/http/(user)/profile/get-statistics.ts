@@ -6,7 +6,7 @@ import { Statistics } from "@/types/user/user-statistics";
 interface GetStatisticsResponse {
   statusCode: number;
   message: string;
-  data: Statistics[];
+  data: Statistics;
 }
 
 export const getStatisticsHandler = async (
@@ -26,7 +26,7 @@ export const useGetStatistics = (
   options?: Partial<UseQueryOptions<GetStatisticsResponse, AxiosError>>
 ) => {
   return useQuery({
-    queryKey: ["user-learning-path"],
+    queryKey: ["user-statistics"],
     queryFn: () => getStatisticsHandler(token),
     ...options,
   });
