@@ -10,6 +10,8 @@ import {
   User,
   BookOpen,
   Users,
+  Library,
+  BookCheck,
 } from "lucide-react";
 import { Session } from "next-auth";
 import SideNavL from "@/components/atoms/sidenav/SideNavL";
@@ -51,6 +53,18 @@ export default function Sidenav({ children, session }: SidenavProps) {
               label: "Pengguna",
               icon: Users,
               active: pathname === "/dashboard/admin/users",
+            },
+            {
+              href: "/dashboard/admin/quizzes",
+              label: "Quizzes",
+              icon: BookCheck,
+              active: pathname === "/dashboard/admin/quizzes",
+            },
+            {
+              href: "/dashboard/admin/materials",
+              label: "Materials",
+              icon: Library,
+              active: pathname === "/dashboard/admin/materials",
             },
           ]
         : [
