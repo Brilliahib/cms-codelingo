@@ -5,4 +5,7 @@ export interface Auth {
   email: string;
   role: string;
   image: string;
+  exp: number;
+  level: number;
+  league: string;
 }
