@@ -65,6 +65,13 @@ export default function QuizDetailContent({ id }: QuizDetailParams) {
         setCorrectAnswer(data?.data.correct_answer.answer_text);
         setSubmittedAnswer(selectedAnswer);
         setIsAnswerSubmitted(true);
+        if (data.data.is_correct === false) {
+          const incorrectSound = new Audio("/sounds/wrong.mp3");
+          incorrectSound.play();
+        } else {
+          const correctSound = new Audio("/sounds/correct.mp3");
+          correctSound.play();
+        }
       },
       onError: (error) => {
         console.error("Error submitting question:", error);
@@ -88,11 +95,11 @@ export default function QuizDetailContent({ id }: QuizDetailParams) {
             <h1 className="font-bold text-2xl">{data?.data.question_text}</h1>
           </div>
         </div>
-        <div className="grid md:grid-cols-2 md:gap-x-12 md:gap-y-6 gap-8">
+        <div className="grid md:grid-cols-2 grid-cols-1 md:gap-x-12 md:gap-y-6 gap-8">
           {data?.data.answers.map((answer) => (
             <Button
               key={answer.id}
-              className={`bg-[#273856] rounded-2xl text-white border-[#1D2941] font-semibold text-xl border-b-8 border-r-8 text-center cursor-pointer hover:bg-primary hover:border-secondary p-10 ${
+              className={`bg-[#273856] rounded-2xl text-white border-[#1D2941] font-semibold md:text-xl text-sm border-b-8 border-r-8 text-center cursor-pointer hover:bg-primary hover:border-secondary md:p-10 p-6 text-wrap ${
                 isSubmitting ? "opacity-50 pointer-events-none" : ""
               } ${
                 isAnswerSubmitted && answer.answer_text === correctAnswer
