@@ -1,6 +1,7 @@
 "use client";
 
 import { learningColumns } from "@/components/atoms/datacolumn/DataLearningPath";
+import DialogCreateLearningPath from "@/components/atoms/dialog/DialogCreateLearningPath";
 import SearchInput from "@/components/atoms/search/SearchInput";
 import { DataTable } from "@/components/molecules/datatable/DataTable";
 import { Button } from "@/components/ui/button";
@@ -24,6 +25,13 @@ export default function LearningDashboardAdminWrapper() {
     data?.data.filter((learning) =>
       learning.title?.toLowerCase().includes(searchQuery.toLowerCase())
     ) || [];
+
+  const [dialogCreateLearningPathOpen, setDialogCreateLearningPathOpen] =
+    useState(false);
+
+  const handleLearningPathDialogOpen = () => {
+    setDialogCreateLearningPathOpen(true);
+  };
   return (
     <>
       <div className="py-8 space-y-8">
@@ -33,12 +41,16 @@ export default function LearningDashboardAdminWrapper() {
             className="min-w-[250px]"
             props="Search learning path..."
           />
-          <Link href={"/dashboard/admin/learning/create"}>
-            <Button>Tambah Learning Path</Button>
-          </Link>
+          <Button onClick={handleLearningPathDialogOpen}>
+            Tambah Learning Path
+          </Button>
         </div>
         <DataTable columns={learningColumns} data={filteredData} />
       </div>
+      <DialogCreateLearningPath
+        open={dialogCreateLearningPathOpen}
+        setOpen={setDialogCreateLearningPathOpen}
+      />
     </>
   );
 }
