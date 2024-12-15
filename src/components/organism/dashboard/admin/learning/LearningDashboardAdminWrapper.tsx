@@ -7,7 +7,6 @@ import { DataTable } from "@/components/molecules/datatable/DataTable";
 import { Button } from "@/components/ui/button";
 import { useGetAllLearningPathAdmin } from "@/http/(admin)/learning/get-all-learning";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 import { useState } from "react";
 
 export default function LearningDashboardAdminWrapper() {

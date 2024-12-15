@@ -1,7 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-
+import Image from "next/image";
 import ActionButton from "@/components/molecules/datatable/ActionButton";
 import {
   DropdownMenuItem,
@@ -10,9 +10,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { Eye, SquarePen } from "lucide-react";
-import { Quiz } from "@/types/quiz/quiz";
+import { Question } from "@/types/quiz/quiz";
+import { format } from "date-fns";
+import { id } from "date-fns/locale";
 
-export const quizColumns: ColumnDef<Quiz>[] = [
+export const questionColumns: ColumnDef<Question>[] = [
   {
     accessorKey: "id",
     header: "No",
@@ -21,34 +23,51 @@ export const quizColumns: ColumnDef<Quiz>[] = [
     },
   },
   {
-    accessorKey: "title",
-    header: "Title",
+    accessorKey: "question_text",
+    header: "Pertanyaan",
     cell: ({ row }) => {
       return (
         <p suppressHydrationWarning className="md:line-clamp-2 line-clamp-1">
-          {row.original.title}
+          {row.original.question_text}
         </p>
       );
     },
   },
   {
-    accessorKey: "description",
-    header: "Description",
+    accessorKey: "question_image",
+    header: "Gambar Pertanyaan",
     cell: ({ row }) => {
       return (
         <p suppressHydrationWarning className="md:line-clamp-2 line-clamp-1">
-          {row.original.description}
+          {row.original.question_image ?? "Tidak ada gambar"}
         </p>
       );
     },
   },
   {
-    accessorKey: "type",
-    header: "Learning Path",
+    accessorKey: "created_at",
+    header: "Tanggal Rilis",
     cell: ({ row }) => {
+      const data = row.original;
       return (
-        <p suppressHydrationWarning className="md:line-clamp-2 line-clamp-1">
-          {row.original.learning_path.title}
+        <p suppressHydrationWarning>
+          {format(new Date(data.created_at), "EEEE, d MMMM yyyy", {
+            locale: id,
+          })}
+        </p>
+      );
+    },
+  },
+  {
+    accessorKey: "updated_at",
+    header: "Tanggal Update",
+    cell: ({ row }) => {
+      const data = row.original;
+      return (
+        <p suppressHydrationWarning>
+          {format(new Date(data.updated_at), "EEEE, d MMMM yyyy", {
+            locale: id,
+          })}
         </p>
       );
     },
@@ -64,20 +83,20 @@ export const quizColumns: ColumnDef<Quiz>[] = [
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <Link
-              href={`/dashboard/admin/quizzes/${data.id}/edit`}
+              href={`/dashboard/admin/material/${data.id}/edit`}
               className="flex items-center text-white hover:text-background"
             >
               <SquarePen className="h-4 w-4" />
-              <span className="ml-2">Edit Quiz</span>
+              <span className="ml-2">Edit Question</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link
-              href={`/dashboard/admin/quizzes/${data.id}`}
+              href={`/dashboard/admin/material/${data.id}`}
               className="flex items-center text-white hover:text-background"
             >
               <Eye className="h-4 w-4" />
-              <span className="ml-2">Detail Quiz</span>
+              <span className="ml-2">Detail Question</span>
             </Link>
           </DropdownMenuItem>
         </ActionButton>

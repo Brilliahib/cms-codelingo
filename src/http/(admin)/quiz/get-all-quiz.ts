@@ -25,7 +25,7 @@ export const useGetAllQuizAdmin = (
   options?: Partial<UseQueryOptions<GetAllQuizResponse, AxiosError>>
 ) => {
   return useQuery({
-    queryKey: ["quizzes"],
+    queryKey: ["quizzes-list"],
     queryFn: () => getAllQuizAdminHandler(token),
     ...options,
   });

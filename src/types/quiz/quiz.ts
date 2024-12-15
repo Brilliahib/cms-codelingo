@@ -16,6 +16,7 @@ export interface Question {
   question_image: string;
   user_learning_path_id: number;
   created_at: Date;
+  updated_at: Date;
   answers: Answer[];
 }
 
