@@ -13,11 +13,7 @@ export default function NavLink({ href, label, active }: Link) {
     <Link
       href={href}
       className={cn(
-        "text-sm flex items-center rounded px-5 py-2 font-semibold uppercase",
-        {
-          "text-white hover:text-primary": !active,
-          "text-primary": active,
-        }
+        "text-sm text-white flex items-center rounded px-5 py-2 font-semibold uppercase hover:text-primary"
       )}
     >
       {label}
