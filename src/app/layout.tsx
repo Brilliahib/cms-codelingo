@@ -5,11 +5,28 @@ import GlobalProvider from "@/components/organism/GlobalProvider";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: "Codelingo",
-  description: "Maybe this is on development",
-  icons: {
-    icon: "/images/favicon.ico",
-  },
+  title: "Codelingo - Belajar Coding Menjadi Mudah dan Menyenangkan",
+  description:
+    "CodeLingo adalah program pembelajaran coding yang dirancang khusus untuk anak-anak, mulai dari pemula hingga level intermediate. ",
+  icons: [
+    { rel: "icon", url: "/images/favicon.ico", sizes: "16x16" },
+    { rel: "icon", url: "/images/favicon-32x32.png", sizes: "32x32" },
+    {
+      rel: "apple-touch-icon",
+      url: "/images/apple-touch-icon.png",
+      sizes: "180x180",
+    },
+    {
+      rel: "icon",
+      url: "/images/android-chrome-192x192.png",
+      sizes: "192x192",
+    },
+    {
+      rel: "icon",
+      url: "/images/android-chrome-512x512.png",
+      sizes: "512x512",
+    },
+  ],
 };
 
 const baloo2 = Baloo_2({
