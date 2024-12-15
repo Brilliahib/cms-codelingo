@@ -81,10 +81,10 @@ export default function Sidenav({ children, session }: SidenavProps) {
               active: pathname.startsWith("/dashboard/learning"),
             },
             {
-              href: "/dashboard/mission",
-              label: "Misi",
+              href: "/dashboard/explanation",
+              label: "Pembahasan",
               icon: ScrollText,
-              active: pathname.startsWith("/dashboard/mission"),
+              active: pathname.startsWith("/dashboard/explanation"),
             },
             {
               href: "/dashboard/leaderboard",
