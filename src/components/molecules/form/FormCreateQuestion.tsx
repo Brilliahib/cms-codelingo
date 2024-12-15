@@ -45,6 +45,8 @@ export default function FormCreateQuestion() {
       quiz_id: "",
       question_text: "",
       question_image: null,
+      explanation_text: "",
+      explanation_image: null,
       answers: [{ answer_text: "", is_correct: 0 }],
     },
     mode: "onChange",
@@ -53,7 +55,14 @@ export default function FormCreateQuestion() {
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const router = useRouter();
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+
+  // State untuk preview gambar
+  const [questionImagePreview, setQuestionImagePreview] = useState<
+    string | null
+  >(null);
+  const [explanationImagePreview, setExplanationImagePreview] = useState<
+    string | null
+  >(null);
 
   const { mutate: addQuestionHandler, isPending } = useAddQuestion({
     onError: (error) => {
@@ -75,17 +84,40 @@ export default function FormCreateQuestion() {
     name: "answers",
   });
 
-  const onDrop = useCallback(
+  // Handler untuk question_image
+  const onDropQuestionImage = useCallback(
     (acceptedFiles: File[]) => {
       const file = acceptedFiles[0];
       form.setValue("question_image", file);
-      setImagePreview(URL.createObjectURL(file));
+      setQuestionImagePreview(URL.createObjectURL(file));
     },
     [form]
   );
 
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop,
+  const {
+    getRootProps: getQuestionRootProps,
+    getInputProps: getQuestionInputProps,
+  } = useDropzone({
+    onDrop: onDropQuestionImage,
+    accept: { "image/*": [] },
+    multiple: false,
+  });
+
+  // Handler untuk explanation_image
+  const onDropExplanationImage = useCallback(
+    (acceptedFiles: File[]) => {
+      const file = acceptedFiles[0];
+      form.setValue("explanation_image", file);
+      setExplanationImagePreview(URL.createObjectURL(file));
+    },
+    [form]
+  );
+
+  const {
+    getRootProps: getExplanationRootProps,
+    getInputProps: getExplanationInputProps,
+  } = useDropzone({
+    onDrop: onDropExplanationImage,
     accept: { "image/*": [] },
     multiple: false,
   });
@@ -146,20 +178,20 @@ export default function FormCreateQuestion() {
                 <FormItem>
                   <FormLabel>Gambar Pertanyaan</FormLabel>
                   <div
-                    {...getRootProps()}
+                    {...getQuestionRootProps()}
                     className="border rounded-md p-4 text-center cursor-pointer"
                   >
-                    <input {...getInputProps()} />
-                    {imagePreview ? (
+                    <input {...getQuestionInputProps()} />
+                    {questionImagePreview ? (
                       <div>
                         <Image
-                          src={imagePreview}
-                          alt="Preview"
+                          src={questionImagePreview}
+                          alt="Preview Question"
                           width={300}
                           height={200}
                         />
                         <Button
-                          onClick={() => setImagePreview(null)}
+                          onClick={() => setQuestionImagePreview(null)}
                           variant="destructive"
                           className="mt-2"
                         >
@@ -173,6 +205,54 @@ export default function FormCreateQuestion() {
                 </FormItem>
               )}
             />
+
+            <FormField
+              control={form.control}
+              name="explanation_text"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Pembahasan Soal</FormLabel>
+                  <Input placeholder="Masukkan pembahasan soal" {...field} />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="explanation_image"
+              render={() => (
+                <FormItem>
+                  <FormLabel>Gambar Pembahasan Soal</FormLabel>
+                  <div
+                    {...getExplanationRootProps()}
+                    className="border rounded-md p-4 text-center cursor-pointer"
+                  >
+                    <input {...getExplanationInputProps()} />
+                    {explanationImagePreview ? (
+                      <div>
+                        <Image
+                          src={explanationImagePreview}
+                          alt="Preview Explanation"
+                          width={300}
+                          height={200}
+                        />
+                        <Button
+                          onClick={() => setExplanationImagePreview(null)}
+                          variant="destructive"
+                          className="mt-2"
+                        >
+                          Hapus Gambar
+                        </Button>
+                      </div>
+                    ) : (
+                      <p>Drag & drop atau klik untuk upload gambar</p>
+                    )}
+                  </div>
+                </FormItem>
+              )}
+            />
+
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <FormLabel>Opsi Jawaban</FormLabel>

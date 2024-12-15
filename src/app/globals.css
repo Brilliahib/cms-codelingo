@@ -10,6 +10,18 @@ body {
   font-family: var(--font-baloo2);
 }
 
+.shiki pre,
+.shiki code {
+  margin: 0 !important;
+  padding: 0 24px !important;
+  line-height: 1.8;
+  font-size: medium;
+}
+
+.shiki pre + pre {
+  margin-top: 0 !important;
+}
+
 @layer base {
   :root {
     --background: 220 41% 15%;
@@ -42,6 +54,10 @@ body {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+}
+
+* {
+  scroll-behavior: smooth;
 }
 
 @layer components {
