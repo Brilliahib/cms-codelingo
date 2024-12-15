@@ -9,22 +9,19 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import { Eye, SquarePen } from "lucide-react";
+import { Eye, SquarePen, Trash2 } from "lucide-react";
 import { Quiz } from "@/types/quiz/quiz";
 
-export const quizColumns: ColumnDef<Quiz>[] = [
+interface QuizRowProps extends Quiz {
+  deleteQuizHandler: (data: Quiz) => void;
+}
+
+export const quizColumns: ColumnDef<QuizRowProps>[] = [
   {
     accessorKey: "id",
-    header: "ID",
+    header: "No",
     cell: ({ row }) => {
-      return <p suppressHydrationWarning>{row.original.id}</p>;
-    },
-  },
-  {
-    accessorKey: "learning_path_id",
-    header: "Learning Path ID",
-    cell: ({ row }) => {
-      return <p suppressHydrationWarning>{row.original.learning_path_id}</p>;
+      return <p suppressHydrationWarning>{row.index + 1}</p>;
     },
   },
   {
@@ -51,11 +48,11 @@ export const quizColumns: ColumnDef<Quiz>[] = [
   },
   {
     accessorKey: "type",
-    header: "Type",
+    header: "Learning Path",
     cell: ({ row }) => {
       return (
         <p suppressHydrationWarning className="md:line-clamp-2 line-clamp-1">
-          {row.original.type}
+          {row.original.learning_path.title}
         </p>
       );
     },
@@ -71,7 +68,7 @@ export const quizColumns: ColumnDef<Quiz>[] = [
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <Link
-              href={`/dashboard/admin/quiz/${data.id}/edit`}
+              href={`/dashboard/admin/quizzes/${data.id}/edit`}
               className="flex items-center text-white hover:text-background"
             >
               <SquarePen className="h-4 w-4" />
@@ -80,12 +77,19 @@ export const quizColumns: ColumnDef<Quiz>[] = [
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link
-              href={`/dashboard/admin/quiz/${data.id}`}
+              href={`/dashboard/admin/quizzes/${data.id}`}
               className="flex items-center text-white hover:text-background"
             >
               <Eye className="h-4 w-4" />
               <span className="ml-2">Detail Quiz</span>
             </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => data.deleteQuizHandler(data)}
+            className="cursor-pointer text-red-500 focus:text-red-700"
+          >
+            <Trash2 className="h-4 w-4" />
+            <span className="ml-2">Hapus Quiz</span>
           </DropdownMenuItem>
         </ActionButton>
       );

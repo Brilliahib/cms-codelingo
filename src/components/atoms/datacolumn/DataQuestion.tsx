@@ -10,14 +10,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { Eye, SquarePen, Trash2 } from "lucide-react";
-import { Material } from "@/types/material/material";
+import { Question } from "@/types/quiz/quiz";
+import { format } from "date-fns";
+import { id } from "date-fns/locale";
 import { baseUrl } from "@/utils/misc";
 
-interface MaterialRowProps extends Material {
-  deleteMaterialHandler: (data: Material) => void;
+interface QuestionRowProps extends Question {
+  deleteQuestionHandler: (data: Question) => void;
 }
 
-export const materialColumns: ColumnDef<MaterialRowProps>[] = [
+export const questionColumns: ColumnDef<QuestionRowProps>[] = [
   {
     accessorKey: "id",
     header: "No",
@@ -26,40 +28,63 @@ export const materialColumns: ColumnDef<MaterialRowProps>[] = [
     },
   },
   {
-    accessorKey: "title",
-    header: "Title",
+    accessorKey: "question_text",
+    header: "Pertanyaan",
     cell: ({ row }) => {
       return (
         <p suppressHydrationWarning className="md:line-clamp-2 line-clamp-1">
-          {row.original.title}
+          {row.original.question_text}
         </p>
       );
     },
   },
   {
-    accessorKey: "material_text",
-    header: "Material Text",
+    accessorKey: "question_image",
+    header: "Gambar Pertanyaan",
     cell: ({ row }) => {
+      const imageSrc = row.original.question_image;
       return (
-        <p suppressHydrationWarning className="md:line-clamp-2 line-clamp-1">
-          {row.original.material_text}
+        <>
+          {imageSrc ? (
+            <Image
+              src={`${baseUrl}/${imageSrc}`}
+              alt="Question Image"
+              width={1000}
+              height={1000}
+              className="rounded object-cover max-w-[150px]"
+            />
+          ) : (
+            <p className="text-gray-500">Tidak ada gambar</p>
+          )}
+        </>
+      );
+    },
+  },
+  {
+    accessorKey: "created_at",
+    header: "Tanggal Rilis",
+    cell: ({ row }) => {
+      const data = row.original;
+      return (
+        <p suppressHydrationWarning>
+          {format(new Date(data.created_at), "EEEE, d MMMM yyyy", {
+            locale: id,
+          })}
         </p>
       );
     },
   },
   {
-    accessorKey: "material_image",
-    header: "Material Image",
+    accessorKey: "updated_at",
+    header: "Tanggal Update",
     cell: ({ row }) => {
-      const imageUrl = row.original.material_image;
+      const data = row.original;
       return (
-        <Image
-          src={`${baseUrl}/${row.original.material_image}`}
-          alt={row.original.title}
-          width={1000}
-          height={1000}
-          className="rounded object-cover max-w-[150px]"
-        />
+        <p suppressHydrationWarning>
+          {format(new Date(data.updated_at), "EEEE, d MMMM yyyy", {
+            locale: id,
+          })}
+        </p>
       );
     },
   },
@@ -78,7 +103,7 @@ export const materialColumns: ColumnDef<MaterialRowProps>[] = [
               className="flex items-center text-white hover:text-background"
             >
               <SquarePen className="h-4 w-4" />
-              <span className="ml-2">Edit Materi</span>
+              <span className="ml-2">Edit Question</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
@@ -87,11 +112,11 @@ export const materialColumns: ColumnDef<MaterialRowProps>[] = [
               className="flex items-center text-white hover:text-background"
             >
               <Eye className="h-4 w-4" />
-              <span className="ml-2">Detail Materi</span>
+              <span className="ml-2">Detail Question</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => data.deleteMaterialHandler(data)}
+            onClick={() => data.deleteQuestionHandler(data)}
             className="cursor-pointer text-red-500 focus:text-red-700"
           >
             <Trash2 className="h-4 w-4" />

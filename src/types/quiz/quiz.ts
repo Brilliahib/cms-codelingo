@@ -1,9 +1,12 @@
+import { Learning } from "../learning/learning";
+
 export interface Quiz {
   id: string;
   learning_path_id: number;
   title: string;
   description: string;
   type: string;
+  learning_path: Learning;
 }
 
 export interface Question {
@@ -13,6 +16,7 @@ export interface Question {
   question_image: string;
   user_learning_path_id: number;
   created_at: Date;
+  updated_at: Date;
   answers: Answer[];
 }
 

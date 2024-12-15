@@ -9,12 +9,16 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import { Eye, SquarePen } from "lucide-react";
+import { Eye, SquarePen, Trash2 } from "lucide-react";
 import { Learning } from "@/types/learning/learning";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
 
-export const learningColumns: ColumnDef<Learning>[] = [
+interface LearningRowProps extends Learning {
+  deleteLearningPathHandler: (data: Learning) => void;
+}
+
+export const learningColumns: ColumnDef<LearningRowProps>[] = [
   {
     accessorKey: "index",
     header: "No",
@@ -100,6 +104,13 @@ export const learningColumns: ColumnDef<Learning>[] = [
               <Eye className="h-4 w-4" />
               <span className="ml-2">Detail Learning Path</span>
             </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => data.deleteLearningPathHandler(data)}
+            className="cursor-pointer text-red-500 focus:text-red-700"
+          >
+            <Trash2 className="h-4 w-4" />
+            <span className="ml-2">Hapus Learning Path</span>
           </DropdownMenuItem>
         </ActionButton>
       );

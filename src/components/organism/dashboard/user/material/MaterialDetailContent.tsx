@@ -97,9 +97,12 @@ export default function MaterialDetailContent({ id }: MaterialDetailProps) {
           } gap-8`}
         >
           <div>
-            <h1 className="text-xl leading-loose">
-              {data?.data.material_text}
-            </h1>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: data?.data.material_text ?? "",
+              }}
+              className="prose leading-loose font-semibold text-lg"
+            />
           </div>
           {data?.data.material_image && (
             <div>

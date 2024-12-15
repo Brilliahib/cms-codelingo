@@ -2,7 +2,7 @@ import { Material } from "../material/material";
 import { Quiz } from "../quiz/quiz";
 
 export interface Learning {
-  id: number;
+  id: string;
   title: string;
   description: string;
   created_at: Date;
@@ -10,7 +10,7 @@ export interface Learning {
 }
 
 export interface LearningDetail {
-  id: number;
+  id: string;
   title: string;
   description: string;
   created_at: Date;
