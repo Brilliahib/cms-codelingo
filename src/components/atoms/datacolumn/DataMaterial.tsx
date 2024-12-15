@@ -9,11 +9,15 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import { Eye, SquarePen } from "lucide-react";
+import { Eye, SquarePen, Trash2 } from "lucide-react";
 import { Material } from "@/types/material/material";
 import { baseUrl } from "@/utils/misc";
 
-export const materialColumns: ColumnDef<Material>[] = [
+interface MaterialRowProps extends Material {
+  deleteMaterialHandler: (data: Material) => void;
+}
+
+export const materialColumns: ColumnDef<MaterialRowProps>[] = [
   {
     accessorKey: "id",
     header: "No",
@@ -74,7 +78,7 @@ export const materialColumns: ColumnDef<Material>[] = [
               className="flex items-center text-white hover:text-background"
             >
               <SquarePen className="h-4 w-4" />
-              <span className="ml-2">Edit Material</span>
+              <span className="ml-2">Edit Materi</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
@@ -83,8 +87,15 @@ export const materialColumns: ColumnDef<Material>[] = [
               className="flex items-center text-white hover:text-background"
             >
               <Eye className="h-4 w-4" />
-              <span className="ml-2">Detail Material</span>
+              <span className="ml-2">Detail Materi</span>
             </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => data.deleteMaterialHandler(data)}
+            className="cursor-pointer text-red-500 focus:text-red-700"
+          >
+            <Trash2 className="h-4 w-4" />
+            <span className="ml-2">Hapus Materi</span>
           </DropdownMenuItem>
         </ActionButton>
       );

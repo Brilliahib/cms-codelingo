@@ -25,7 +25,7 @@ export const useGetAllMaterialAdmin = (
   options?: Partial<UseQueryOptions<GetAllMaterialResponse, AxiosError>>
 ) => {
   return useQuery({
-    queryKey: ["learning-path-list"],
+    queryKey: ["materials-list"],
     queryFn: () => getAllMaterialAdminHandler(token),
     ...options,
   });
