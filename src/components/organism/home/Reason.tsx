@@ -1,5 +1,6 @@
 import flowchart from "/public/images/flowchart.gif";
 import pairs from "/public/images/pairs.gif";
+import liga from "/public/images/liga.gif";
 import Image from "next/image";
 
 export default function Reason() {
@@ -33,8 +34,7 @@ export default function Reason() {
             </p>
           </div>
           <div className="flex flex-col space-y-4">
-            {/* animasi tambahan lainnya? */}
-            <Image src={flowchart} alt="flowchart" width={500} height={500} />
+            <Image src={liga} alt="liga" width={500} height={500} />
             <h1 className="text-[#38B5FC] md:text-2xl text-xl font-bold">
               Belajar Seperti Bermain
             </h1>
