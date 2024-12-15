@@ -46,25 +46,25 @@ export default function Sidenav({ children, session }: SidenavProps) {
               href: "/dashboard/admin/learning",
               label: "Learning Path",
               icon: BookOpen,
-              active: pathname === "/dashboard/admin/learning",
-            },
-            {
-              href: "/dashboard/admin/users",
-              label: "Pengguna",
-              icon: Users,
-              active: pathname === "/dashboard/admin/users",
-            },
-            {
-              href: "/dashboard/admin/quizzes",
-              label: "Quizzes",
-              icon: BookCheck,
-              active: pathname === "/dashboard/admin/quizzes",
+              active: pathname.startsWith("/dashboard/admin/learning"),
             },
             {
               href: "/dashboard/admin/materials",
               label: "Materials",
               icon: Library,
-              active: pathname === "/dashboard/admin/materials",
+              active: pathname.startsWith("/dashboard/admin/materials"),
+            },
+            {
+              href: "/dashboard/admin/quizzes",
+              label: "Quizzes",
+              icon: BookCheck,
+              active: pathname.startsWith("/dashboard/admin/quizzes"),
+            },
+            {
+              href: "/dashboard/admin/users",
+              label: "Pengguna",
+              icon: Users,
+              active: pathname.startsWith("/dashboard/admin/users"),
             },
           ]
         : [

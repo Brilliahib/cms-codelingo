@@ -181,6 +181,7 @@ export default function FormCreateMaterial() {
                           [{ header: [1, 2, false] }],
                           ["bold", "italic", "underline"],
                           ["link", "image"],
+                          [{ list: "ordered" }, { list: "bullet" }],
                           ["clean"],
                         ],
                       }}
@@ -208,11 +209,11 @@ export default function FormCreateMaterial() {
                       >
                         <Input {...getInputProps()} />
                         {imagePreview ? (
-                          <div className="relative w-full">
+                          <div className="relative">
                             <Image
                               src={imagePreview}
                               alt="Preview"
-                              className="max-h-[200px] w-full object-cover rounded-lg"
+                              className="max-h-[200px] max-w-[500px] object-cover rounded-lg"
                               width={1000}
                               height={1000}
                             />
