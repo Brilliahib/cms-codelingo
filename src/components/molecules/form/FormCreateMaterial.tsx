@@ -110,12 +110,9 @@ export default function FormCreateMaterial() {
   });
   return (
     <>
-      <div>
+      <div className="py-8 space-y-8">
         <Form {...form}>
-          <form
-            className="space-y-5 pt-4"
-            onSubmit={form.handleSubmit(onSubmit)}
-          >
+          <form className="space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
               name="learning_path_id"
