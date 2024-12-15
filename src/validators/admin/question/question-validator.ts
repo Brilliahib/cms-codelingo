@@ -23,7 +23,7 @@ export const questionSchema = z.object({
   answers: z.array(
     z.object({
       answer_text: z.string().min(1, { message: "Jawaban tidak boleh kosong" }),
-      is_correct: z.boolean().transform((val) => (val ? 1 : 0)),
+      is_correct: z.coerce.boolean().transform((val) => (val ? 1 : 0)),
     })
   ),
 });

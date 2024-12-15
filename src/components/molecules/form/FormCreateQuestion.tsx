@@ -45,7 +45,7 @@ export default function FormCreateQuestion() {
       quiz_id: "",
       question_text: "",
       question_image: null,
-      answers: [{ answer_text: "", is_correct: false }],
+      answers: [{ answer_text: "", is_correct: 0 }],
     },
     mode: "onChange",
   });
@@ -90,7 +90,10 @@ export default function FormCreateQuestion() {
     multiple: false,
   });
 
-  const onSubmit = (data: QuestionType) => addQuestionHandler(data);
+  const onSubmit = (data: QuestionType) => {
+    console.log("Form Data:", data); // Debug data yang diterima
+    addQuestionHandler(data);
+  };
 
   const { data } = useGetAllQuizAdmin(session?.access_token as string);
 
@@ -173,7 +176,7 @@ export default function FormCreateQuestion() {
               className="border-0"
               type="button"
               size={"sm"}
-              onClick={() => append({ answer_text: "", is_correct: false })}
+              onClick={() => append({ answer_text: "", is_correct: 0 })}
             >
               <Plus className="text-white" />
             </Button>
@@ -188,14 +191,14 @@ export default function FormCreateQuestion() {
                     <FormControl>
                       <div className="flex items-center gap-2">
                         <Checkbox
-                          checked={field.value}
+                          checked={field.value === 1}
                           onCheckedChange={(checked) => {
                             const updatedAnswers = [
                               ...form.getValues("answers"),
                             ];
                             updatedAnswers.forEach((answer, i) => {
                               updatedAnswers[i].is_correct =
-                                i === index ? checked : false;
+                                i === index ? (checked ? 1 : 0) : 0;
                             });
                             form.setValue("answers", updatedAnswers);
                           }}
