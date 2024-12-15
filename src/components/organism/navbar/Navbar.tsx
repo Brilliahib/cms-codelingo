@@ -19,7 +19,7 @@ export default function Navbar() {
   const links = useMemo(
     () => [
       {
-        href: "/",
+        href: "#home",
         label: "Home",
         active: pathname === "/",
       },
@@ -44,7 +44,7 @@ export default function Navbar() {
           <NavL />
           <nav className="hidden items-center font-semibold md:flex">
             {links.map((link) => (
-              <NavLink key={link.label} {...link}/>
+              <NavLink key={link.label} {...link} />
             ))}
           </nav>
           <NavButton links={links} />
