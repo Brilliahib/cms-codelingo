@@ -101,7 +101,7 @@ export default function MaterialDetailContent({ id }: MaterialDetailProps) {
               dangerouslySetInnerHTML={{
                 __html: data?.data.material_text ?? "",
               }}
-              className="prose"
+              className="prose leading-loose font-semibold text-lg"
             />
           </div>
           {data?.data.material_image && (
