@@ -13,6 +13,7 @@ import { Eye, SquarePen } from "lucide-react";
 import { Question } from "@/types/quiz/quiz";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
+import { baseUrl } from "@/utils/misc";
 
 export const questionColumns: ColumnDef<Question>[] = [
   {
@@ -37,10 +38,21 @@ export const questionColumns: ColumnDef<Question>[] = [
     accessorKey: "question_image",
     header: "Gambar Pertanyaan",
     cell: ({ row }) => {
+      const imageSrc = row.original.question_image;
       return (
-        <p suppressHydrationWarning className="md:line-clamp-2 line-clamp-1">
-          {row.original.question_image ?? "Tidak ada gambar"}
-        </p>
+        <>
+          {imageSrc ? (
+            <Image
+              src={`${baseUrl}/${imageSrc}`}
+              alt="Question Image"
+              width={1000}
+              height={1000}
+              className="rounded object-cover max-w-[150px]"
+            />
+          ) : (
+            <p className="text-gray-500">Tidak ada gambar</p>
+          )}
+        </>
       );
     },
   },
