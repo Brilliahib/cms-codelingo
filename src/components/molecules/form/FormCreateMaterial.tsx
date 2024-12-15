@@ -77,7 +77,7 @@ export default function FormCreateMaterial() {
       queryClient.invalidateQueries({
         queryKey: ["materials-list"],
       });
-      router.refresh();
+      router.push("/dashboard/admin/materials");
     },
   });
 
