@@ -11,13 +11,13 @@ export default function Footer() {
             </p>
           </div>
           <div className="mt-4 md:mt-0 flex md:flex-col flex-row gap-4 md:gap-2 text-sm text-right">
-            <a href="#" className="hover:text-green-500">
+            <a href="/" className="hover:text-green-500">
               HOME
             </a>
-            <a href="#" className="hover:text-green-500">
+            <a href="#services" className="hover:text-green-500">
               OUR SERVICE
             </a>
-            <a href="#" className="hover:text-green-500">
+            <a href="#about" className="hover:text-green-500">
               ABOUT
             </a>
           </div>

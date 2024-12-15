@@ -16,13 +16,6 @@ export interface Link {
 export default function Navbar() {
   const pathname = usePathname();
 
-  const handleScroll = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   const links = useMemo(
     () => [
       {
@@ -31,7 +24,7 @@ export default function Navbar() {
         active: pathname === "/",
       },
       {
-        href: "#our-service",
+        href: "#services",
         label: "Our Service",
         active: pathname === "/",
       },
@@ -53,7 +46,6 @@ export default function Navbar() {
             {links.map((link) => (
               <NavLink key={link.label} {...link}/>
             ))}
-
           </nav>
           <NavButton links={links} />
         </div>
