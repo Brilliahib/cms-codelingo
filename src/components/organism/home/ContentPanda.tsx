@@ -5,13 +5,13 @@ import { Zap } from "lucide-react";
 export default function ContentPanda() {
   return (
     <>
-      <div className="bg-[#273856] w-full flex flex-col md:flex-row items-center justify-center gap-12 pad-x md:py-16 py-12">
+      <div className="bg-[#273856] w-full flex flex-col md:flex-row items-center justify-center gap-12 pad-x md:py-12 py-12">
         <Image
           src={learnPanda}
           alt="learn panda"
           width="1000"
           height="1000"
-          className="md:max-w-[300px] max-w-[200px]"
+          className="md:max-w-[200px] max-w-[200px]"
         />
         <div className="md:w-6/12 text-justify space-y-4">
           <div className="flex items-center gap-4">
@@ -29,6 +29,7 @@ export default function ContentPanda() {
           </p>
         </div>
       </div>
+      <div id="services"></div>
     </>
   );
 }

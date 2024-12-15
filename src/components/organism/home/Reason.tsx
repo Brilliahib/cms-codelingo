@@ -6,17 +6,17 @@ import Image from "next/image";
 export default function Reason() {
   return (
     <>
-      <div className="my-24 flex flex-col items-center pad-x md:space-y-8 space-y-4">
+      <div className="my-24 flex flex-col items-center pad-x md:space-y-16 space-y-12">
         <h1 className="text-nature font-bold md:text-3xl text-2xl tracking-wider text-center">
           Kenapa Memilih CodeLingo?
         </h1>
-        <div className="grid md:grid-cols-3 grid-cols-1 gap-8 md:gap-12">
+        <div className="grid md:grid-cols-3 grid-cols-1 gap-8 md:gap-12 text-center md:text-left">
           <div className="flex flex-col space-y-4">
             <Image src={pairs} alt="pairs" width={500} height={500} />
             <h1 className="text-[#38B5FC] md:text-2xl text-xl font-bold">
               Program Belajar Interaktif
             </h1>
-            <p className="text-left opacity-80">
+            <p className="opacity-80">
               Anak-anak belajar coding dengan materi visual yang menarik dan
               kuis interaktif seperti permainan, sehingga belajar terasa seru
               dan menyenangkan.
@@ -27,7 +27,7 @@ export default function Reason() {
             <h1 className="text-[#38B5FC] md:text-2xl text-xl font-bold">
               Pendekatan Ramah Anak
             </h1>
-            <p className="text-left opacity-80">
+            <p className="opacity-80">
               Pembelajaran dirancang khusus agar sesuai dengan kebutuhan
               anak-anak, menggunakan gambar berwarna-warni, animasi interaktif,
               dan narasi sederhana yang mudah dipahami.
@@ -38,7 +38,7 @@ export default function Reason() {
             <h1 className="text-[#38B5FC] md:text-2xl text-xl font-bold">
               Belajar Seperti Bermain
             </h1>
-            <p className="text-left opacity-80">
+            <p className="opacity-80">
               Pembelajaran dikemas seperti permainan, di mana anak-anak bisa
               mengumpulkan EXP, mencapai level baru, dan bersaing di liga
               leaderboard yang akan meningkatkan rasa percaya diri dan semangat

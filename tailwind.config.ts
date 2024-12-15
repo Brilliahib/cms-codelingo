@@ -60,6 +60,20 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        zoomOut: {
+          "0%": { opacity: "0", transform: "scale(1.2)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+      },
+      animation: {
+        zoomIn: "zoomIn 2s ease-out",
+        fadeIn: "fadeIn 2s ease-out",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

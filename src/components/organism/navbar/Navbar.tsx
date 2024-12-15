@@ -21,17 +21,17 @@ export default function Navbar() {
       {
         href: "/",
         label: "Home",
-        active: pathname.startsWith("/"),
+        active: pathname === "/",
       },
       {
-        href: "/services",
+        href: "#services",
         label: "Our Service",
-        active: pathname.startsWith("/services"),
+        active: pathname === "/",
       },
       {
-        href: "/about",
+        href: "#about",
         label: "About",
-        active: pathname.startsWith("/about"),
+        active: pathname === "/",
       },
     ],
     [pathname]
@@ -40,11 +40,11 @@ export default function Navbar() {
   return (
     <>
       <div className="w-full bg-background z-50 sticky top-0 mb-0">
-        <div className="flex justify-between bg-background py-2 pad-x-xl">
+        <div className="flex justify-between items-center bg-background py-2 pad-x-xl">
           <NavL />
           <nav className="hidden items-center font-semibold md:flex">
             {links.map((link) => (
-              <NavLink key={link.label} {...link} />
+              <NavLink key={link.label} {...link}/>
             ))}
           </nav>
           <NavButton links={links} />
