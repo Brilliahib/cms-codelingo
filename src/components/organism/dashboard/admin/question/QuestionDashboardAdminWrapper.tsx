@@ -49,7 +49,7 @@ export default function QuestionDashboardAdminWrapper({ id }: QuestionParams) {
             className="min-w-[250px]"
             props="Cari pertanyaan..."
           />
-          <Link href={"/dashboard/admin/materials/create"}>
+          <Link href={"/dashboard/admin/quizzes/create"}>
             <Button>Tambah Pertanyaan</Button>
           </Link>
         </div>
