@@ -17,6 +17,11 @@ export const addQuestionHandler = async (
 
   formData.append("quiz_id", body.quiz_id);
   formData.append("question_text", body.question_text);
+  formData.append("explanation_text", body.explanation_text);
+
+  if (body.explanation_image) {
+    formData.append("explanation_image", body.explanation_image);
+  }
 
   if (body.question_image) {
     formData.append("question_image", body.question_image);

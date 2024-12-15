@@ -38,6 +38,8 @@ import { useSession } from "next-auth/react";
 import { useGetAllLearningPath } from "@/http/(user)/learning/get-all-learning";
 import { Input } from "@/components/ui/input";
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
+import hljs from "highlight.js";
+import "highlight.js/styles/atom-one-dark.css";
 import "react-quill-new/dist/quill.snow.css";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -55,6 +57,17 @@ export default function FormCreateMaterial() {
     },
     mode: "onChange",
   });
+
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ["bold", "italic", "underline", "strike"],
+      ["link", "image", "code-block"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["clean"],
+    ],
+    syntax: false,
+  };
 
   const queryClient = useQueryClient();
   const { toast } = useToast();
@@ -173,17 +186,9 @@ export default function FormCreateMaterial() {
                     <ReactQuill
                       value={field.value}
                       onChange={field.onChange}
-                      modules={{
-                        toolbar: [
-                          [{ header: [1, 2, false] }],
-                          ["bold", "italic", "underline"],
-                          ["link", "image"],
-                          [{ list: "ordered" }, { list: "bullet" }],
-                          ["clean"],
-                        ],
-                      }}
-                      style={{ color: "white" }}
-                      placeholder="Masukkan konten material"
+                      modules={modules}
+                      theme="snow"
+                      placeholder="Masukkan konten material atau kode"
                     />
                   </FormControl>
                   <FormMessage />

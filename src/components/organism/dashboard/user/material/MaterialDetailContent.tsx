@@ -12,6 +12,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import hljs from "highlight.js";
+import "highlight.js/styles/github-dark.css";
 
 interface MaterialDetailProps {
   id: string;
@@ -71,6 +73,16 @@ export default function MaterialDetailContent({ id }: MaterialDetailProps) {
     }
   }, [currentIndex, materials.length, currentMaterialId, markCompleteMaterial]);
 
+  const formatMaterialText = (htmlText: string): string => {
+    return htmlText.replace(
+      /<div class="ql-code-block">([\s\S]*?)<\/div>/g,
+      (match, code) => {
+        const highlightedCode = hljs.highlightAuto(code).value;
+        return `<pre class="shiki shiki-themes github-dark github-light"><code class="hljs">${highlightedCode}</code></pre>`;
+      }
+    );
+  };
+
   return (
     <div className="min-h-screen flex flex-col pt-12">
       <div className="flex-1 md:space-y-12 space-y-8 pad-x">
@@ -99,7 +111,7 @@ export default function MaterialDetailContent({ id }: MaterialDetailProps) {
           <div>
             <div
               dangerouslySetInnerHTML={{
-                __html: data?.data.material_text ?? "",
+                __html: formatMaterialText(data?.data.material_text ?? ""),
               }}
               className="prose leading-loose font-semibold text-lg"
             />
