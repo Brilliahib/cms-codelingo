@@ -9,28 +9,28 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { Material } from "@/types/material/material";
+import { Quiz } from "@/types/quiz/quiz";
 
-interface DeleteMaterialProps {
+interface DeleteQuizProps {
   confirmDelete: () => void;
-  data?: Material | null;
+  data?: Quiz | null;
   open: boolean;
   setOpen: (open: boolean) => void;
   isPending?: boolean;
 }
 
-const DeleteMaterialDialog = ({
+const DeleteQuizDialog = ({
   open,
   setOpen,
   confirmDelete,
   data,
   isPending,
-}: DeleteMaterialProps) => {
+}: DeleteQuizProps) => {
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Hapus Materi?</AlertDialogTitle>
+          <AlertDialogTitle>Hapus Quiz?</AlertDialogTitle>
           <AlertDialogDescription>
             Apakah anda yakin ingin menghapus <strong>{data?.title}</strong>?
             Data yang sudah dihapus tidak dapat dikembalikan.
@@ -51,4 +51,4 @@ const DeleteMaterialDialog = ({
   );
 };
 
-export default DeleteMaterialDialog;
+export default DeleteQuizDialog;

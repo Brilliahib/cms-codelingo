@@ -9,13 +9,17 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import { Eye, SquarePen } from "lucide-react";
+import { Eye, SquarePen, Trash2 } from "lucide-react";
 import { Question } from "@/types/quiz/quiz";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
 import { baseUrl } from "@/utils/misc";
 
-export const questionColumns: ColumnDef<Question>[] = [
+interface QuestionRowProps extends Question {
+  deleteQuestionHandler: (data: Question) => void;
+}
+
+export const questionColumns: ColumnDef<QuestionRowProps>[] = [
   {
     accessorKey: "id",
     header: "No",
@@ -110,6 +114,13 @@ export const questionColumns: ColumnDef<Question>[] = [
               <Eye className="h-4 w-4" />
               <span className="ml-2">Detail Question</span>
             </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => data.deleteQuestionHandler(data)}
+            className="cursor-pointer text-red-500 focus:text-red-700"
+          >
+            <Trash2 className="h-4 w-4" />
+            <span className="ml-2">Hapus Materi</span>
           </DropdownMenuItem>
         </ActionButton>
       );

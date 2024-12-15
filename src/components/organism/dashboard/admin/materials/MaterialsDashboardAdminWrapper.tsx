@@ -16,9 +16,6 @@ import { useState } from "react";
 
 export default function MaterialsDashboardAdminWrapper() {
   const { data: session, status } = useSession();
-  const [selectedMaterial, setSelectedMaterial] = useState<Material | null>(
-    null
-  );
   const { data, isPending } = useGetAllMaterialAdmin(
     session?.access_token as string,
     {
@@ -27,7 +24,9 @@ export default function MaterialsDashboardAdminWrapper() {
   );
 
   const [searchQuery, setSearchQuery] = useState("");
-
+  const [selectedMaterial, setSelectedMaterial] = useState<Material | null>(
+    null
+  );
   const [openAlertDelete, setOpenAlertDelete] = useState<boolean>(false);
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -60,7 +59,7 @@ export default function MaterialsDashboardAdminWrapper() {
     setOpenAlertDelete(true);
   };
 
-  const handleDeleteGame = () => {
+  const handleDeleteMaterial = () => {
     if (selectedMaterial?.id) {
       deleteMaterialHandler({
         id: selectedMaterial.id.toLocaleString(),
@@ -94,7 +93,7 @@ export default function MaterialsDashboardAdminWrapper() {
       <DeleteMaterialDialog
         open={openAlertDelete}
         setOpen={setOpenAlertDelete}
-        confirmDelete={handleDeleteGame}
+        confirmDelete={handleDeleteMaterial}
         data={selectedMaterial}
         isPending={isDeletePending}
       />
