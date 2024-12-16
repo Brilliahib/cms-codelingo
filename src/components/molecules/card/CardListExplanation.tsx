@@ -24,7 +24,6 @@ export default function CardListExplanation() {
                   <h1 className="text-xl md:text-2xl font-bold">
                     {quiz.title}
                   </h1>
-                  <p className="opacity-80">{quiz.description}</p>
                 </div>
                 <Button>
                   <Link href={`/dashboard/explanation/${quiz.id}/`}>
