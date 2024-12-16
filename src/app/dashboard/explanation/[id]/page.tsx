@@ -7,7 +7,7 @@ interface DashboardExplanationDetailPageProps {
 export default async function DashboardExplanationDetailPage({
   params,
 }: DashboardExplanationDetailPageProps) {
-  const { id } = params;
+  const { id } = await params;
 
   return (
     <>

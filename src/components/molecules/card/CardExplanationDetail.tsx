@@ -53,17 +53,17 @@ export default function CardExplanationDetail({
             <CardContent className="p-6">
               <div className="flex gap-4 items-center">
                 <ArrowLeft className="w-6 h-6" />
-                <h1 className="font-bold text-2xl">Explanation Details</h1>
+                <h1 className="font-bold text-2xl">Detail Pembahasan</h1>
               </div>
             </CardContent>
           </Card>
         </Link>
 
         {data?.data.map((question, index) => (
-          <div key={question.id} className=" shadow-lg rounded-xl p-6">
+          <div key={question.id} className=" shadow-lg rounded-xl">
             <div className="mb-6">
               <h2 className="text-xl font-bold text-white mb-4">
-                {question.question_text}
+                {index + 1}. {question.question_text}
               </h2>
 
               {question.explanation_image && (
@@ -78,15 +78,15 @@ export default function CardExplanationDetail({
                 </div>
               )}
 
-              <div className="space-y-3">
+              <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
                 {question.answers.map((answer) => (
                   <div
                     key={answer.id}
                     className="flex flex-col text-center gap-3"
                   >
                     <Badge
-                      variant={answer.is_correct ? "secondary" : "destructive"}
-                      className="text-sm py-1 px-3 rounded-md"
+                      variant={answer.is_correct ? "success" : "destructive"}
+                      className="text-sm py-2 px-3 rounded-md"
                     >
                       {answer.answer_text}
                     </Badge>
@@ -95,10 +95,8 @@ export default function CardExplanationDetail({
               </div>
 
               {question.explanation_text && (
-                <Card className="mt-6 p-4 rounded-lg">
-                  <h3 className="font-semibold text-white mb-2">
-                    Explanation:
-                  </h3>
+                <Card className="mt-6 p-4 rounded-lg shadow-none">
+                  <h3 className="font-semibold text-white mb-2">Pembahasan:</h3>
                   <p className="text-white">{question.explanation_text}</p>
                 </Card>
               )}
