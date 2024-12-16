@@ -6,7 +6,7 @@ import { getServerSession } from "next-auth/next";
 export default async function AuthLayout({ children }: PropsWithChildren) {
   const session = await getServerSession(authOptions);
 
-  if (session) return redirect("/dashboard");
+  if (session) return redirect("/dashboard/learning");
 
   return <>{children}</>;
 }

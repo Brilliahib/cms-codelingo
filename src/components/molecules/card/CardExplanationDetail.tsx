@@ -3,6 +3,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useGetQuestions } from "@/http/(user)/explanation/get-detail-user-quiz";
 import { ArrowLeft } from "lucide-react";
 import { useSession } from "next-auth/react";
@@ -17,24 +18,30 @@ export default function CardExplanationDetail({
   quizId,
 }: CardLearningDetailProps) {
   const { data: session, status } = useSession();
-  const { data, isLoading, error } = useGetQuestions(
+  const { data, isPending } = useGetQuestions(
     session?.access_token as string,
     quizId,
     { enabled: status === "authenticated" }
   );
 
-  if (isLoading) {
+  if (isPending) {
     return (
-      <div className="flex justify-center items-center min-h-[300px]">
-        <p>Loading explanation details...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="bg-red-50 border border-red-200 p-4 rounded-lg">
-        <p className="text-red-600">Error loading explanation details</p>
+      <div className="max-w-4xl mx-auto md:space-y-8 space-y-6">
+        <Skeleton className="h-16 w-full rounded-lg" />
+        {[...Array(3)].map((_, index) => (
+          <div key={index} className="shadow-lg rounded-xl">
+            <Card className="mb-6">
+              <CardContent className="p-6">
+                <Skeleton className="h-6 w-16 mb-4" />
+                <Skeleton className="h-8 w-3/4 mb-4" />
+                {[...Array(2)].map((_, i) => (
+                  <Skeleton key={i} className="h-6 w-1/2 mb-2" />
+                ))}
+                <Skeleton className="h-10 w-32 mt-4" />
+              </CardContent>
+            </Card>
+          </div>
+        ))}
       </div>
     );
   }

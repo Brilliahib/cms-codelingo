@@ -13,7 +13,7 @@ export interface CardUserProfileProps {
 export default function CardUserProfile({ session }: CardUserProfileProps) {
   return (
     <>
-      <div className="flex justify-between">
+      <div className="md:flex md:space-y-0 space-y-4 justify-between">
         <div className="flex flex-row items-center gap-8">
           <Image
             src={session.user.image ?? "/images/profile/general.png"}
