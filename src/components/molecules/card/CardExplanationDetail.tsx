@@ -1,19 +1,12 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Card, CardContent } from "@/components/ui/card";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { useGetQuestions } from "@/http/(user)/explanation/get-detail-user-quiz";
-import { ArrowLeft, CheckCircle2, XCircle } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import Image from "next/image";
-import { baseUrl } from "@/utils/misc";
 import { Button } from "@/components/ui/button";
 
 interface CardLearningDetailProps {
@@ -60,7 +53,7 @@ export default function CardExplanationDetail({
           </Card>
         </Link>
 
-        {data?.data.map((question, index) => (
+        {data?.data.map((question) => (
           <div key={question.id} className="shadow-lg rounded-xl">
             <Card className="mb-6">
               <CardContent className="p-6">
@@ -78,7 +71,7 @@ export default function CardExplanationDetail({
                     </Badge>
                   </div>
                 ))}
-                <Link href={"/dashboard/explanation/key"}>
+                <Link href={`/dashboard/explanation/key/${question.id}`}>
                   <Button className="my-4">Lihat Jawaban</Button>
                 </Link>
               </CardContent>
