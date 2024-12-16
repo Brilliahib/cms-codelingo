@@ -1,7 +1,7 @@
 import ExplanationDetailDashboardWrapper from "@/components/organism/dashboard/user/explanation/ExplanationDetailDashboardWrapper";
 
 interface DashboardExplanationDetailPageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export default async function DashboardExplanationDetailPage({
