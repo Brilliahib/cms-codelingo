@@ -33,13 +33,13 @@ export default function CardProfile({ session }: CardProfileProps) {
   });
 
   return (
-    <Card className="bg-transparent border">
+    <Card className="bg-transparent border md:block hidden">
       <CardContent className="p-8">
         <div className="md:space-y-6 space-y-4">
           <div className="flex justify-between">
             <h1 className="text-xl font-bold text-muted/80">Profile</h1>
             <Link
-              href={"#"}
+              href={"/dashboard/profile"}
               className="text-lg font-bold uppercase text-primary hover:underline"
             >
               Lihat Semua

@@ -6,10 +6,10 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ArrowLeft } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { baseUrl } from "@/utils/misc";
 import { useGetQuestionDetail } from "@/http/(user)/learning/quiz/get-detail-question";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface CardLearningDetailProps {
   quizId: string;
@@ -19,17 +19,27 @@ export default function CardKey({ quizId }: CardLearningDetailProps) {
   const { data: session, status } = useSession();
   const token = session?.access_token;
 
-  const { data, isLoading, error } = useGetQuestionDetail(
+  const { data, isPending, error } = useGetQuestionDetail(
     { id: quizId, token: token || "" },
     {
       enabled: status === "authenticated" && !!token,
     }
   );
 
-  if (isLoading) {
+  if (isPending) {
     return (
-      <div className="flex justify-center items-center min-h-[300px]">
-        <p>Loading explanation details...</p>
+      <div className="space-y-6 max-w-4xl mx-auto">
+        <Skeleton className="h-14 w-full rounded-lg" />
+        <div className="shadow-lg rounded-xl">
+          <Skeleton className="h-64 w-full mb-4 rounded-lg" />
+          <Skeleton className="h-8 w-3/4 mb-2" />
+          <Skeleton className="h-8 w-1/2 mb-4" />
+          <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
+            <Skeleton className="h-10 w-full rounded-md" />
+            <Skeleton className="h-10 w-full rounded-md" />
+          </div>
+          <Skeleton className="h-8 w-1/3 mt-4" />
+        </div>
       </div>
     );
   }
