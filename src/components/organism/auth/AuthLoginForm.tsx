@@ -61,7 +61,7 @@ export default function LoginForm() {
       variant: "success",
     });
 
-    router.push("/dashboard");
+    router.push("/dashboard/learning");
   };
 
   return (

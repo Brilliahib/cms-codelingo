@@ -10,7 +10,7 @@ const AdminLayout = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     if (status === "authenticated" && session?.user.role !== "admin") {
-      router.push("/dashboard");
+      router.push("/dashboard/learning");
     }
   }, [session, status, router]);
 

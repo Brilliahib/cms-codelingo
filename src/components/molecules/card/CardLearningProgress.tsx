@@ -18,7 +18,7 @@ export default function CardLearningProgress() {
 
   return (
     <>
-      <Card className="bg-transparent border">
+      <Card className="bg-transparent border md:block hidden">
         <CardContent className="p-8">
           <div className="md:space-y-6 space-y-4">
             <div className="flex justify-between">
