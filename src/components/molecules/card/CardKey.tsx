@@ -95,19 +95,17 @@ export default function CardKey({ quizId }: CardLearningDetailProps) {
 
               {question.explanation_text && (
                 <Card className="mt-6 p-4 rounded-lg shadow-none">
-                  <h3 className="font-semibold text-white mb-2 opacity-80">
+                  <h3 className="font-semibold text-white mb-1 opacity-80">
                     Jawaban Benar:
                   </h3>
                   <h2 className="mb-4">
-                    {question.answers.map((answer) => (
-                      <div
-                        key={answer.id}
-                        className="flex flex-col text-center gap-3"
-                      >
-                        {answer.answer_text}
-                      </div>
-                    ))}
+                    {question.answers
+                      .filter((answer) => answer.is_correct)
+                      .map((answer) => (
+                        <div key={answer.id}>{answer.answer_text}</div>
+                      ))}
                   </h2>
+
                   <p className="text-white opacity-80">
                     {question.explanation_text}
                   </p>
