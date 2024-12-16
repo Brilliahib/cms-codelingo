@@ -88,7 +88,7 @@ export default function AvatarProfileDashboardContent() {
             className="rounded-full"
           />
 
-          <div className="flex items-center gap-4 md:gap-8 overflow-x-auto flex-nowrap">
+          <div className="flex items-center gap-4 md:gap-8 overflow-x-auto flex-nowrap no-scrollbar">
             {imageList.map((image) => (
               <Image
                 key={image}
