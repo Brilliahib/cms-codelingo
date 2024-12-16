@@ -68,12 +68,12 @@ export default function Sidenav({ children, session }: SidenavProps) {
             },
           ]
         : [
-            // {
-            //   href: "/dashboard",
-            //   label: "Dashboard",
-            //   icon: LayoutDashboardIcon,
-            //   active: pathname === "/dashboard",
-            // },
+            {
+              href: "/dashboard",
+              label: "Dashboard",
+              icon: LayoutDashboardIcon,
+              active: pathname === "/dashboard",
+            },
             {
               href: "/dashboard/learning",
               label: "Belajar",
