@@ -61,10 +61,6 @@ export default function CardKey({ quizId }: CardLearningDetailProps) {
         {question && (
           <div key={question.id} className="shadow-lg rounded-xl">
             <div className="mb-6">
-              <h2 className="text-xl font-bold text-white mb-4">
-                {question.question_text}
-              </h2>
-
               {question.explanation_image && (
                 <div className="mb-6 rounded-lg overflow-hidden shadow-md">
                   <Image
@@ -76,6 +72,10 @@ export default function CardKey({ quizId }: CardLearningDetailProps) {
                   />
                 </div>
               )}
+
+              <h2 className="text-xl font-bold text-white mb-4">
+                {question.question_text}
+              </h2>
 
               <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
                 {question.answers.map((answer) => (
@@ -95,8 +95,22 @@ export default function CardKey({ quizId }: CardLearningDetailProps) {
 
               {question.explanation_text && (
                 <Card className="mt-6 p-4 rounded-lg shadow-none">
-                  <h3 className="font-semibold text-white mb-2">Pembahasan:</h3>
-                  <p className="text-white">{question.explanation_text}</p>
+                  <h3 className="font-semibold text-white mb-2 opacity-80">
+                    Jawaban Benar:
+                  </h3>
+                  <h2 className="mb-4">
+                    {question.answers.map((answer) => (
+                      <div
+                        key={answer.id}
+                        className="flex flex-col text-center gap-3"
+                      >
+                        {answer.answer_text}
+                      </div>
+                    ))}
+                  </h2>
+                  <p className="text-white opacity-80">
+                    {question.explanation_text}
+                  </p>
                 </Card>
               )}
             </div>
