@@ -14,6 +14,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import { baseUrl } from "@/utils/misc";
+import { Button } from "@/components/ui/button";
 
 interface CardLearningDetailProps {
   quizId: string;
@@ -53,54 +54,35 @@ export default function CardExplanationDetail({
             <CardContent className="p-6">
               <div className="flex gap-4 items-center">
                 <ArrowLeft className="w-6 h-6" />
-                <h1 className="font-bold text-2xl">Detail Pembahasan</h1>
+                <h1 className="font-bold text-2xl">Kembali</h1>
               </div>
             </CardContent>
           </Card>
         </Link>
 
         {data?.data.map((question, index) => (
-          <div key={question.id} className=" shadow-lg rounded-xl">
-            <div className="mb-6">
-              <h2 className="text-xl font-bold text-white mb-4">
-                {index + 1}. {question.question_text}
-              </h2>
-
-              {question.explanation_image && (
-                <div className="mb-6 rounded-lg overflow-hidden shadow-md">
-                  <Image
-                    src={`${baseUrl}/${question.explanation_image}`}
-                    alt="Explanation Image"
-                    width={800}
-                    height={400}
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
-              )}
-
-              <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
+          <div key={question.id} className="shadow-lg rounded-xl">
+            <Card className="mb-6">
+              <CardContent className="p-6">
+                <Badge className="opacity-80 my-4">QUIZ</Badge>
+                <h2 className="text-xl font-bold text-white mb-4">
+                  {question.question_text}
+                </h2>
                 {question.answers.map((answer) => (
                   <div
                     key={answer.id}
-                    className="flex flex-col text-center gap-3"
+                    className="flex flex-col text-center gap-3 py-1"
                   >
-                    <Badge
-                      variant={answer.is_correct ? "success" : "destructive"}
-                      className="text-sm py-2 px-3 rounded-md"
-                    >
+                    <Badge className="text-sm py-2 px-3 rounded-md">
                       {answer.answer_text}
                     </Badge>
                   </div>
                 ))}
-              </div>
-
-              {question.explanation_text && (
-                <Card className="mt-6 p-4 rounded-lg shadow-none">
-                  <h3 className="font-semibold text-white mb-2">Pembahasan:</h3>
-                  <p className="text-white">{question.explanation_text}</p>
-                </Card>
-              )}
-            </div>
+                <Link href={"/dashboard/explanation/key"}>
+                  <Button className="my-4">Lihat Jawaban</Button>
+                </Link>
+              </CardContent>
+            </Card>
           </div>
         ))}
       </div>
