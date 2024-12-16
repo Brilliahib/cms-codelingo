@@ -20,10 +20,7 @@ export const questionSchema = z.object({
         ),
     ])
     .optional(),
-  explanation_text: z
-    .string()
-    .min(1, { message: "Pertanyaan wajib diisi" })
-    .max(255, { message: "Pertanyaan maksimal 255 karakter" }),
+  explanation_text: z.string().min(1, { message: "Pertanyaan wajib diisi" }),
   explanation_image: z
     .union([
       z.string().nullable().optional(),
