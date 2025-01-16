@@ -27,7 +27,7 @@ export default function DashboardUserWrapper() {
             className="md:max-w-[400px] max-w-[300px] md:inline hidden"
           />
           {/* Card Service */}
-          <div className="md:absolute md:top-[95%] md:left-1/2 transform md:-translate-x-1/2 md:-translate-y-1/2 w-full">
+          <div className="md:absolute md:top-[98%] md:left-1/2 transform md:-translate-x-1/2 md:-translate-y-1/2 w-full">
             <div className="grid md:grid-cols-3 grid-cols-1 gap-4 md:gap-6">
               <div>
                 <Card>

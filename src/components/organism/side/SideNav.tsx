@@ -12,6 +12,7 @@ import {
   Users,
   Library,
   BookCheck,
+  Bot,
 } from "lucide-react";
 import { Session } from "next-auth";
 import SideNavL from "@/components/atoms/sidenav/SideNavL";
@@ -93,6 +94,12 @@ export default function Sidenav({ children, session }: SidenavProps) {
               active: pathname.startsWith("/dashboard/leaderboard"),
             },
             {
+              href: "/dashboard/ask",
+              label: "Tanya Pandu",
+              icon: Bot,
+              active: pathname.startsWith("/dashboard/ask"),
+            },
+            {
               href: "/dashboard/profile",
               label: "Profile",
               active: pathname.startsWith("/dashboard/profile"),
@@ -106,7 +113,7 @@ export default function Sidenav({ children, session }: SidenavProps) {
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <SideNavL links={links} />
-      <div className="flex max-h-screen flex-col overflow-y-auto">
+      <div className="flex w-full flex-col overflow-y-auto">
         <SideNavHeader session={session} links={links} />
         <main className="mt-16 flex flex-1 flex-col gap-4 p-4 md:px-20 md:py-6 lg:gap-6">
           {children}
