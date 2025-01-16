@@ -2,6 +2,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import DashboardTitle from "@/components/atoms/typography/DashboardTitle";
+import DashboardUserWrapper from "@/components/organism/dashboard/user/dashboard/DashboardUserWrapper";
 
 export default function Dashboard() {
   const { data: session } = useSession();
@@ -16,7 +17,7 @@ export default function Dashboard() {
   }
   return (
     <>
-      <DashboardTitle title="Dashboard" />
+      <DashboardUserWrapper />
     </>
   );
 }
