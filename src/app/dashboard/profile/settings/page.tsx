@@ -4,7 +4,7 @@ import SettingProfileDashboardWrapper from "@/components/organism/dashboard/user
 export default function DashboardProfileSettingPage() {
   return (
     <>
-      <DashboardTitle title="Setting Profile" />
+      {/* <DashboardTitle title="Setting Profile" /> */}
       <SettingProfileDashboardWrapper />
     </>
   );
